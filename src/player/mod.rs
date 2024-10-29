@@ -1,21 +1,20 @@
-use std::f32::consts::PI;
+mod movement;
 
+use crate::structs::{
+    input::CursorCoords,
+    markers::PlayerMarker,
+    plugins::{PlayerMovementPlugin, PlayerPlugin},
+};
 use bevy::prelude::*;
-
-use crate::input::cursor::CursorCoords;
-
-pub struct PlayerPlugin;
+use std::f32::consts::PI;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
-        app
+        app.add_plugins(PlayerMovementPlugin)
             .add_systems(Startup, init)
             .add_systems(Update, update);
     }
 }
-
-#[derive(Component)]
-struct PlayerMarker;
 
 fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn((
@@ -23,11 +22,14 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
             texture: asset_server.load("player.png"),
             ..default()
         },
-        PlayerMarker
+        PlayerMarker,
     ));
 }
 
-fn update(mut transform: Query<&mut Transform, With<PlayerMarker>>, cursor_coords: Res<CursorCoords>) {
+fn update(
+    mut transform: Query<&mut Transform, With<PlayerMarker>>,
+    cursor_coords: Res<CursorCoords>,
+) {
     let translation = transform.single().translation;
     let dx = cursor_coords.0.x - translation.x;
     let dy = cursor_coords.0.y - translation.y;

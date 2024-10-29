@@ -1,13 +1,11 @@
-pub mod cursor;
+mod cursor;
+mod keyboard;
 
+use crate::structs::plugins::{CursorPlugin, InputPlugin, KeyboardPlugin};
 use bevy::prelude::*;
-use cursor::CursorPlugin;
-
-pub struct InputPlugin;
 
 impl Plugin for InputPlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_plugins(CursorPlugin);
+        app.add_plugins(KeyboardPlugin).add_plugins(CursorPlugin);
     }
 }

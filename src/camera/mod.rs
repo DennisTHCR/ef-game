@@ -1,16 +1,17 @@
-use bevy::prelude::*;
+mod movement;
 
-pub struct CameraPlugin;
+use crate::structs::{
+    markers::MainCamera,
+    plugins::{CameraMovementPlugin, CameraPlugin},
+};
+use bevy::prelude::*;
 
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_systems(Startup, init);    
+        app.add_plugins(CameraMovementPlugin)
+            .add_systems(Startup, init);
     }
 }
-
-#[derive(Component)]
-pub struct MainCamera;
 
 fn init(mut commands: Commands) {
     commands.spawn((
