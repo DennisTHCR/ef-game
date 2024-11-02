@@ -24,6 +24,6 @@ fn update_cursor_resource(
         cursor_coords.0 = window
             .cursor_position()
             .and_then(|cursor| camera.viewport_to_world_2d(camera_transform, cursor))
-            .unwrap();
+            .unwrap_or_default();
     }
 }

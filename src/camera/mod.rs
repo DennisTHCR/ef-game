@@ -9,7 +9,8 @@ use bevy::prelude::*;
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins(CameraMovementPlugin)
-            .add_systems(Startup, init);
+            .add_systems(Startup, init)
+            .insert_resource(Msaa::Off);
     }
 }
 

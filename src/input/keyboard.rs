@@ -26,5 +26,5 @@ fn update(mut keyboard_input: ResMut<KeyboardInput>, keys: Res<ButtonInput<KeyCo
     if keys.pressed(KeyCode::KeyS) {
         direction.y -= 1.0;
     }
-    keyboard_input.direction = direction;
+    keyboard_input.direction = direction.normalize_or_zero();
 }
