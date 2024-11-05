@@ -1,8 +1,8 @@
 mod generation;
 
-use generation::get_material;
 use crate::structs::world::Material;
 use bevy::prelude::*;
+use generation::get_material;
 
 use crate::structs::plugins::WorldPlugin;
 
@@ -25,15 +25,15 @@ fn init(
     let mut diamonds = 0;
     let mut iron = 0;
     let mut coal = 0;
-    for y in -640..=640 {
-        for x in -640..=640 {
+    for y in -320..=320 {
+        for x in -320..=320 {
             texture_atlas.index = match get_material(x, y) {
                 Material::GRASS => 0,
                 Material::STONE => 1,
                 Material::COAL => 2,
                 Material::IRON => 3,
                 Material::DIAMOND => 4,
-                Material::EMERALD => 5
+                Material::EMERALD => 5,
             };
             if texture_atlas.index == 5 {
                 emeralds += 1;

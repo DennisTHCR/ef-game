@@ -6,3 +6,4 @@ pub struct KeyboardPlugin;
 pub struct PlayerMovementPlugin;
 pub struct CameraMovementPlugin;
 pub struct WorldPlugin;
+pub struct MousePlugin;

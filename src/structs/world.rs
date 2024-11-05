@@ -4,6 +4,5 @@ pub enum Material {
     COAL,
     IRON,
     DIAMOND,
-    EMERALD
+    EMERALD,
 }
-

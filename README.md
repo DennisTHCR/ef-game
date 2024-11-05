@@ -7,7 +7,7 @@ TODO:
 - [ ] JSON SerDe for dev
 - [ ] Binary file format for prod
 # Ideas
-- [ ] Procedural generation
+- [x] Procedural generation
 - [ ] Satisfactory -> Mine by hand first, then build machines
 - [ ] All machines take coal
 - [ ] Conveyor Belts
@@ -16,3 +16,6 @@ TODO:
 - [ ] Anvil
 - [ ] Crafting Table
 - [ ] Redstone
+- [ ] Upgradable buildings
+- [ ] Building variants
+- [ ] Limiting Factor = Transport Distance, Solution = Repeaters, Repeaters take coal too
