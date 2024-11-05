@@ -1,4 +1,4 @@
-pub enum Materials {
+pub enum Material {
     GRASS,
     STONE,
     COAL,

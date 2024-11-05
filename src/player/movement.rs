@@ -20,7 +20,7 @@ fn handle_keyboard(
     time: Res<Time>,
 ) {
     transform.single_mut().translation +=
-        keyboard_input.direction.extend(0.0) * 100.0 * time.delta_seconds();
+        keyboard_input.direction.extend(0.0) * 1000.0 * time.delta_seconds();
 }
 
 fn handle_mouse(

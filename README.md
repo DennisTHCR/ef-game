@@ -4,6 +4,8 @@ TODO:
 - [x] Create basic template - Dennis
 - [x] Split up work - both<br>Tymur Textures, Dennis Code
 - [ ] Decide on clear game mechanics - both
+- [ ] JSON SerDe for dev
+- [ ] Binary file format for prod
 # Ideas
 - [ ] Procedural generation
 - [ ] Satisfactory -> Mine by hand first, then build machines
