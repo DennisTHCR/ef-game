@@ -16,8 +16,7 @@ fn init(
     let texture_handle = asset_server.load("sprite_sheet.png");
     let texture_atlas_layout = TextureAtlasLayout::from_grid(UVec2::splat(16), 8, 8, None, None);
     let texture_atlas_layout_handle = texture_atlases.add(texture_atlas_layout);
-    let mut texture_atlas = TextureAtlas::from(texture_atlas_layout_handle.clone());
-    texture_atlas.index = 1;
+    let texture_atlas = TextureAtlas::from(texture_atlas_layout_handle.clone());
     for y in 0..16 {
         for x in 0..16 {
             commands.spawn((
