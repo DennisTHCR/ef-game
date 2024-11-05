@@ -20,7 +20,7 @@ fn init(mut commands: Commands) {
             projection: OrthographicProjection {
                 near: -1000.,
                 far: 1000.,
-                scale: 0.2,
+                scale: 1.,
                 ..default()
             },
             ..default()
