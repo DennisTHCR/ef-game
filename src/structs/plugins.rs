@@ -7,3 +7,4 @@ pub struct PlayerMovementPlugin;
 pub struct CameraMovementPlugin;
 pub struct WorldPlugin;
 pub struct MousePlugin;
+pub struct WindowInfoPlugin;

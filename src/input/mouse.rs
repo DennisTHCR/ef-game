@@ -1,15 +1,10 @@
-use bevy::{
-    input::mouse::MouseWheel,
-    prelude::*,
-};
+use bevy::{input::mouse::MouseWheel, prelude::*};
 
 use crate::structs::{input::MouseInput, plugins::MousePlugin};
 
 impl Plugin for MousePlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_systems(Startup, init)
-            .add_systems(Update, update);
+        app.add_systems(Startup, init).add_systems(Update, update);
     }
 }
 

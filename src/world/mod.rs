@@ -25,8 +25,8 @@ fn init(
     let mut diamonds = 0;
     let mut iron = 0;
     let mut coal = 0;
-    for y in -320..=320 {
-        for x in -320..=320 {
+    for y in -2..2 {
+        for x in -2..2 {
             texture_atlas.index = match get_material(x, y) {
                 Material::GRASS => 0,
                 Material::STONE => 1,
