@@ -2,13 +2,13 @@ use bevy::prelude::*;
 
 #[derive(Resource, Default)]
 pub struct WindowInfo {
-    pub corners: WindowCorners,
+    pub corner_coords: CornerCoords,
 }
 
-#[derive(Default)]
-pub struct WindowCorners {
-    pub top_left: Vec2,
-    pub top_right: Vec2,
-    pub bottom_left: Vec2,
-    pub bottom_right: Vec2,
+#[derive(Default, Clone)]
+pub struct CornerCoords {
+    pub min_x: f32,
+    pub max_x: f32,
+    pub min_y: f32,
+    pub max_y: f32,
 }
