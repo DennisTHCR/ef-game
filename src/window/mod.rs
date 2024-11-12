@@ -19,11 +19,12 @@ fn update(
 ) {
     let window = q_window.single();
     let (camera, camera_transform) = q_camera.single();
-    let translation = camera_transform.translation;
     let size = window.size();
     let coords = &mut window_info.corner_coords;
-    coords.min_x = translation.x - size.x / 2.0;
-    coords.max_x = translation.x + size.x / 2.0;
-    coords.min_y = translation.y - size.y / 2.0;
-    coords.max_y = translation.y + size.y / 2.0;
+    let top_left = camera.viewport_to_world_2d(camera_transform, Vec2::new(0., 0.)).unwrap_or_default();
+    let bottom_right = camera.viewport_to_world_2d(camera_transform, Vec2::new(size.x, size.y)).unwrap_or_default();
+    coords.min_x = top_left.x;
+    coords.max_x = bottom_right.x;
+    coords.min_y = top_left.y;
+    coords.max_y = bottom_right.y;
 }
