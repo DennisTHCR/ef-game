@@ -3,6 +3,7 @@ use bevy::prelude::*;
 #[derive(Resource, Default)]
 pub struct WindowInfo {
     pub corner_coords: CornerCoords,
+    pub size: Vec2,
 }
 
 #[derive(Default, Clone)]

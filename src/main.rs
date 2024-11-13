@@ -6,7 +6,7 @@ mod window;
 mod world;
 
 use bevy::prelude::*;
-use structs::plugins::{CameraPlugin, InputPlugin, PlayerPlugin, WorldPlugin, WindowInfoPlugin};
+use structs::plugins::{CameraPlugin, InputPlugin, PlayerPlugin, WindowInfoPlugin, WorldPlugin};
 
 fn main() {
     App::new()
