@@ -12,4 +12,5 @@ pub struct KeyboardInput {
 pub struct MouseInput {
     pub scroll_up: bool,
     pub scroll_down: bool,
+    pub left_click: bool,
 }
