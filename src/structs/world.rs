@@ -1,5 +1,6 @@
 use bevy::{prelude::*, utils::HashMap};
 
+#[derive(Hash, Eq, PartialEq, PartialOrd, Ord, Clone, Copy)]
 pub enum Material {
     GRASS,
     STONE,

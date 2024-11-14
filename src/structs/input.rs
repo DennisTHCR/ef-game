@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 #[derive(Resource, Default)]
-pub struct CursorCoords(pub Vec2);
+pub struct CursorPos(pub Vec2);
 
 #[derive(Resource, Default)]
 pub struct KeyboardInput {

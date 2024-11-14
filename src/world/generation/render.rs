@@ -37,23 +37,26 @@ pub fn render_tiles(
             if entity_map.get(&(x, y)).is_none() {
                 let texture_handle = world_textures.texture_handle.clone();
                 let mut texture_atlas = world_textures.texture_atlas.clone();
-                texture_atlas.index = match material_map.get(&(x, y)).unwrap() {
-                    Material::GRASS => 0,
-                    Material::STONE => 1,
-                    Material::COAL => 2,
-                    Material::IRON => 3,
-                    Material::DIAMOND => 4,
-                    Material::EMERALD => 5,
-                };
-                let entity = commands.spawn((
-                    SpriteBundle {
-                        texture: texture_handle,
-                        transform: Transform::from_xyz((x * 16) as f32, (y * 16) as f32, -1.),
-                        ..default()
-                    },
-                    texture_atlas,
-                ));
-                entity_map.insert((x, y), entity.id());
+                let material = material_map.get(&(x, y));
+                if material.is_some() {
+                    texture_atlas.index = match material.unwrap() {
+                        Material::GRASS => 0,
+                        Material::STONE => 1,
+                        Material::COAL => 2,
+                        Material::IRON => 3,
+                        Material::DIAMOND => 4,
+                        Material::EMERALD => 5,
+                    };
+                    let entity = commands.spawn((
+                        SpriteBundle {
+                            texture: texture_handle,
+                            transform: Transform::from_xyz((x * 16) as f32, (y * 16) as f32, -1.),
+                            ..default()
+                        },
+                        texture_atlas,
+                    ));
+                    entity_map.insert((x, y), entity.id());
+                }
             }
         }
     }

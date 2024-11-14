@@ -1,5 +1,6 @@
 pub struct PlayerPlugin;
 pub struct PlayerMovementPlugin;
+pub struct PlayerResourcePlugin;
 pub struct CameraPlugin;
 pub struct CameraMovementPlugin;
 pub struct InputPlugin;

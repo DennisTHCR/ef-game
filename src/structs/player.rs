@@ -14,6 +14,6 @@ impl Default for PlayerSettings {
 }
 
 #[derive(Resource, Default)]
-struct ResourcesAvailable {
+pub struct AvailableResources {
     pub resource_map: HashMap<Material, i128>,
 }

@@ -4,7 +4,7 @@ use bevy::prelude::*;
 
 use crate::structs::{
     camera::CameraSettings,
-    input::{CursorCoords, KeyboardInput, MouseInput},
+    input::{CursorPos, KeyboardInput, MouseInput},
     markers::PlayerMarker,
     player::PlayerSettings,
     plugins::PlayerMovementPlugin,
@@ -28,7 +28,7 @@ fn handle_keyboard(
 
 fn handle_mouse(
     mut transform: Query<&mut Transform, With<PlayerMarker>>,
-    cursor_coords: Res<CursorCoords>,
+    cursor_coords: Res<CursorPos>,
     mouse_input: Res<MouseInput>,
     mut camera_settings: ResMut<CameraSettings>,
 ) {

@@ -1,6 +1,6 @@
 use bevy::{prelude::*, window::PrimaryWindow};
 
-use crate::structs::{input::CursorCoords, markers::MainCamera, plugins::CursorPlugin};
+use crate::structs::{input::CursorPos, markers::MainCamera, plugins::CursorPlugin};
 
 impl Plugin for CursorPlugin {
     fn build(&self, app: &mut App) {
@@ -10,11 +10,11 @@ impl Plugin for CursorPlugin {
 }
 
 fn init(mut commands: Commands) {
-    commands.insert_resource(CursorCoords::default());
+    commands.insert_resource(CursorPos::default());
 }
 
 fn update_cursor_resource(
-    mut cursor_coords: ResMut<CursorCoords>,
+    mut cursor_coords: ResMut<CursorPos>,
     q_window: Query<&Window, With<PrimaryWindow>>,
     q_camera: Query<(&Camera, &GlobalTransform), With<MainCamera>>,
 ) {

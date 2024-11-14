@@ -1,15 +1,17 @@
 mod movement;
+mod resources;
 
 use crate::structs::{
     markers::PlayerMarker,
     player::PlayerSettings,
-    plugins::{PlayerMovementPlugin, PlayerPlugin},
+    plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin},
 };
 use bevy::prelude::*;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins(PlayerMovementPlugin)
+            .add_plugins(PlayerResourcePlugin)
             .add_systems(Startup, init);
     }
 }
