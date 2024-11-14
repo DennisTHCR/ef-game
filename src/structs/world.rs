@@ -19,3 +19,8 @@ pub struct WorldTextures {
 pub struct WorldEntities {
     pub entity_map: HashMap<(i32, i32), Entity>,
 }
+
+#[derive(Resource, Default)]
+pub struct WorldMaterials {
+    pub material_map: HashMap<(i32, i32), Material>,
+}

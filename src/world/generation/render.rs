@@ -3,15 +3,13 @@ use bevy::prelude::*;
 use crate::structs::{
     plugins::WorldRenderPlugin,
     window::WindowInfo,
-    world::{Material, WorldEntities, WorldTextures},
+    world::{Material, WorldEntities, WorldMaterials, WorldTextures},
 };
-
-use super::util::get_material;
 
 impl Plugin for WorldRenderPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, init)
-            .add_systems(Update, generate_tiles);
+            .add_systems(Update, render_tiles);
     }
 }
 
@@ -19,12 +17,14 @@ fn init(mut commands: Commands) {
     commands.insert_resource(WorldEntities::default());
 }
 
-fn generate_tiles(
+pub fn render_tiles(
     mut commands: Commands,
     window_info: Res<WindowInfo>,
     mut world_entities: ResMut<WorldEntities>,
     world_textures: Res<WorldTextures>,
+    world_materials: Res<WorldMaterials>,
 ) {
+    let material_map = &world_materials.material_map;
     let entity_map = &mut world_entities.entity_map;
     let corners = &window_info.corner_coords;
     let start_x = (corners.min_x / 16.).floor() as i32;
@@ -37,7 +37,7 @@ fn generate_tiles(
             if entity_map.get(&(x, y)).is_none() {
                 let texture_handle = world_textures.texture_handle.clone();
                 let mut texture_atlas = world_textures.texture_atlas.clone();
-                texture_atlas.index = match get_material(x, y) {
+                texture_atlas.index = match material_map.get(&(x, y)).unwrap() {
                     Material::GRASS => 0,
                     Material::STONE => 1,
                     Material::COAL => 2,
