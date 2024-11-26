@@ -2,7 +2,10 @@ use std::time::Duration;
 
 use bevy::prelude::*;
 
-use crate::structs::{plugins::MobSpawnPlugin, world::{EnemyMarker, SpawnerMarker, SpawnerTimer}};
+use crate::structs::{
+    plugins::MobSpawnPlugin,
+    world::{EnemyMarker, SpawnerMarker, SpawnerTimer},
+};
 
 impl Plugin for MobSpawnPlugin {
     fn build(&self, app: &mut App) {
@@ -10,9 +13,12 @@ impl Plugin for MobSpawnPlugin {
     }
 }
 
-
-
-fn tick_spawners(mut spawners: Query<(&mut SpawnerTimer, &Transform), With<SpawnerMarker>>, time: Res<Time>, mut commands: Commands, asset_server: Res<AssetServer>) {
+fn tick_spawners(
+    mut spawners: Query<(&mut SpawnerTimer, &Transform), With<SpawnerMarker>>,
+    time: Res<Time>,
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+) {
     spawners.iter_mut().for_each(|(mut timer, &transform)| {
         timer.0.tick(Duration::from_secs_f32(time.delta_seconds()));
         if timer.0.just_finished() {

@@ -53,7 +53,11 @@ pub fn render_tiles(
                         SpriteBundle {
                             texture: texture_handle,
                             // magic number 8.0 (sprite width/height = 16, transform is at center, this fixes the offset)
-                            transform: Transform::from_xyz((x * 16) as f32 - 8.0, (y * 16) as f32 - 8.0, -1.),
+                            transform: Transform::from_xyz(
+                                (x * 16) as f32 - 8.0,
+                                (y * 16) as f32 - 8.0,
+                                -1.,
+                            ),
                             ..default()
                         },
                         texture_atlas,

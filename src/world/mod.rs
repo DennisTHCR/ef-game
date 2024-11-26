@@ -1,7 +1,10 @@
 mod generation;
 mod mob_spawning;
 
-use crate::structs::{plugins::{MobSpawnPlugin, WorldGenerationPlugin}, world::WorldTextures};
+use crate::structs::{
+    plugins::{MobSpawnPlugin, WorldGenerationPlugin},
+    world::WorldTextures,
+};
 use bevy::prelude::*;
 
 use crate::structs::plugins::WorldPlugin;

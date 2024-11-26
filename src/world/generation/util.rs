@@ -37,7 +37,8 @@ fn is_stone(x: i32, y: i32) -> bool {
 }
 
 fn is_spawner(x: i32, y: i32) -> bool {
-    Perlin::new(5).get([x as f64 / 2., y as f64 / 2.]) > 0.99 && Perlin::new(200).get([x as f64 / 48., y as f64 / 8.]) > 0.8
+    Perlin::new(5).get([x as f64 / 2., y as f64 / 2.]) > 0.99
+        && Perlin::new(200).get([x as f64 / 48., y as f64 / 8.]) > 0.8
 }
 
 fn is_emerald(x: i32, y: i32) -> bool {

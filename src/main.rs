@@ -1,4 +1,5 @@
 mod camera;
+mod enemies;
 mod input;
 mod player;
 mod structs;
@@ -6,7 +7,9 @@ mod window;
 mod world;
 
 use bevy::prelude::*;
-use structs::plugins::{CameraPlugin, InputPlugin, PlayerPlugin, WindowInfoPlugin, WorldPlugin};
+use structs::plugins::{
+    CameraPlugin, EnemyPlugin, InputPlugin, PlayerPlugin, WindowInfoPlugin, WorldPlugin,
+};
 
 fn main() {
     App::new()
@@ -17,6 +20,7 @@ fn main() {
             InputPlugin,
             WorldPlugin,
             WindowInfoPlugin,
+            EnemyPlugin,
         ))
         .run();
 }
