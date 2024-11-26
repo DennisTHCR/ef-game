@@ -1,6 +1,7 @@
 mod generation;
+mod mob_spawning;
 
-use crate::structs::{plugins::WorldGenerationPlugin, world::WorldTextures};
+use crate::structs::{plugins::{MobSpawnPlugin, WorldGenerationPlugin}, world::WorldTextures};
 use bevy::prelude::*;
 
 use crate::structs::plugins::WorldPlugin;
@@ -8,7 +9,8 @@ use crate::structs::plugins::WorldPlugin;
 impl Plugin for WorldPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, init)
-            .add_plugins(WorldGenerationPlugin);
+            .add_plugins(WorldGenerationPlugin)
+            .add_plugins(MobSpawnPlugin);
     }
 }
 

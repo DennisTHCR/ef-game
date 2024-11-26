@@ -3,6 +3,7 @@ use bevy::{prelude::*, utils::HashMap};
 #[derive(Hash, Eq, PartialEq, PartialOrd, Ord, Clone, Copy)]
 pub enum Material {
     GRASS,
+    SPAWNER,
     STONE,
     COAL,
     IRON,
@@ -25,3 +26,18 @@ pub struct WorldEntities {
 pub struct WorldMaterials {
     pub material_map: HashMap<(i32, i32), Material>,
 }
+
+#[derive(Component)]
+pub struct SpawnerMarker;
+
+#[derive(Component)]
+pub struct SpawnerTimer(pub Timer);
+
+impl Default for SpawnerTimer {
+    fn default() -> Self {
+        SpawnerTimer(Timer::from_seconds(30., TimerMode::Repeating))
+    }
+}
+
+#[derive(Component)]
+pub struct EnemyMarker;

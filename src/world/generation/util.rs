@@ -4,6 +4,9 @@ use crate::structs::world::Material;
 
 pub fn get_material(x: i32, y: i32) -> Material {
     if !is_stone(x, y) {
+        if is_spawner(x, y) {
+            return Material::SPAWNER;
+        }
         return Material::GRASS;
     };
     let mut material: Material = Material::STONE;
@@ -31,6 +34,10 @@ fn is_stone(x: i32, y: i32) -> bool {
     // The bigger the division of the x/y coordinates, the higher the resolution, the bigger the patches
     let height_value = get_height_value(x, y);
     height_value >= 0.6
+}
+
+fn is_spawner(x: i32, y: i32) -> bool {
+    Perlin::new(5).get([x as f64 / 2., y as f64 / 2.]) > 0.99 && Perlin::new(200).get([x as f64 / 48., y as f64 / 8.]) > 0.8
 }
 
 fn is_emerald(x: i32, y: i32) -> bool {

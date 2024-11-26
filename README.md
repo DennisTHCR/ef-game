@@ -8,14 +8,15 @@ TODO:
 - [ ] Binary file format for prod
 # Ideas
 - [x] Procedural generation
-- [ ] Satisfactory -> Mine by hand first, then build machines
-- [ ] All machines take coal
-- [ ] Conveyor Belts
-- [ ] Furnace
-- [ ] Alloy Furnace
-- [ ] Anvil
-- [ ] Crafting Table
-- [ ] Redstone
-- [ ] Upgradable buildings
-- [ ] Building variants
-- [ ] Limiting Factor = Transport Distance, Solution = Repeaters, Repeaters take coal too
+- [ ] Enemies
+- [ ] Enemy Spawners
+    - [x] Spread around the map
+    - [x] Cooldown
+    - [x] Procedurally generated
+    - [ ] Amount of enemies increases with each round
+    - [x] Cooldown stays consistent
+- [ ] Upgrades
+    - [ ] Mining
+    - [ ] Damage
+    - [ ] Gun
+    - [ ] Ammo (crafting?)

@@ -10,4 +10,5 @@ pub struct MousePlugin;
 pub struct WorldPlugin;
 pub struct WorldGenerationPlugin;
 pub struct WorldRenderPlugin;
+pub struct MobSpawnPlugin;
 pub struct WindowInfoPlugin;

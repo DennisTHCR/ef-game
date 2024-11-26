@@ -3,7 +3,7 @@ use bevy::prelude::*;
 use crate::structs::{
     plugins::WorldRenderPlugin,
     window::WindowInfo,
-    world::{Material, WorldEntities, WorldMaterials, WorldTextures},
+    world::{Material, SpawnerMarker, SpawnerTimer, WorldEntities, WorldMaterials, WorldTextures},
 };
 
 impl Plugin for WorldRenderPlugin {
@@ -39,22 +39,28 @@ pub fn render_tiles(
                 let mut texture_atlas = world_textures.texture_atlas.clone();
                 let material = material_map.get(&(x, y));
                 if material.is_some() {
-                    texture_atlas.index = match material.unwrap() {
+                    let index = match material.unwrap() {
                         Material::GRASS => 0,
                         Material::STONE => 1,
                         Material::COAL => 2,
                         Material::IRON => 3,
                         Material::DIAMOND => 4,
                         Material::EMERALD => 5,
+                        Material::SPAWNER => 6,
                     };
-                    let entity = commands.spawn((
+                    texture_atlas.index = index;
+                    let mut entity = commands.spawn((
                         SpriteBundle {
                             texture: texture_handle,
-                            transform: Transform::from_xyz((x * 16) as f32, (y * 16) as f32, -1.),
+                            // magic number 8.0 (sprite width/height = 16, transform is at center, this fixes the offset)
+                            transform: Transform::from_xyz((x * 16) as f32 - 8.0, (y * 16) as f32 - 8.0, -1.),
                             ..default()
                         },
                         texture_atlas,
                     ));
+                    if index == 6 {
+                        entity.insert((SpawnerMarker, SpawnerTimer::default()));
+                    }
                     entity_map.insert((x, y), entity.id());
                 }
             }
