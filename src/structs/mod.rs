@@ -5,3 +5,4 @@ pub mod player;
 pub mod plugins;
 pub mod window;
 pub mod world;
+pub mod mobs;
