@@ -2,9 +2,7 @@ mod movement;
 mod resources;
 
 use crate::structs::{
-    markers::PlayerMarker,
-    player::PlayerSettings,
-    plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin},
+    markers::PlayerMarker, mobs::Health, player::PlayerSettings, plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin}
 };
 use bevy::prelude::*;
 
@@ -24,5 +22,6 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
             ..default()
         },
         PlayerMarker,
+        Health::default(),
     ));
 }

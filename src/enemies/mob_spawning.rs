@@ -32,6 +32,7 @@ fn tick_spawners(
                     ..default()
                 },
                 EnemyMarker,
+                Health::default_mob(),
             ));
         }
     });
