@@ -3,8 +3,9 @@ use std::time::Duration;
 use bevy::prelude::*;
 
 use crate::structs::{
+    markers::{EnemyMarker, SpawnerMarker},
     plugins::MobSpawnPlugin,
-    world::{EnemyMarker, SpawnerMarker, SpawnerTimer},
+    world::SpawnerTimer,
 };
 
 impl Plugin for MobSpawnPlugin {

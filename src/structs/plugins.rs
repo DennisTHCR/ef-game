@@ -13,3 +13,4 @@ pub struct WorldRenderPlugin;
 pub struct MobSpawnPlugin;
 pub struct WindowInfoPlugin;
 pub struct EnemyPlugin;
+pub struct UiPlugin;

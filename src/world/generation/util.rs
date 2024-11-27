@@ -5,22 +5,22 @@ use crate::structs::world::Material;
 pub fn get_material(x: i32, y: i32) -> Material {
     if !is_stone(x, y) {
         if is_spawner(x, y) {
-            return Material::SPAWNER;
+            return Material::Spawner;
         }
-        return Material::GRASS;
+        return Material::Grass;
     };
-    let mut material: Material = Material::STONE;
+    let mut material: Material = Material::Stone;
     if is_emerald(x, y) {
-        material = Material::EMERALD;
+        material = Material::Emerald;
     }
     if is_diamond(x, y) {
-        material = Material::DIAMOND;
+        material = Material::Diamond;
     }
     if is_iron(x, y) {
-        material = Material::IRON;
+        material = Material::Iron;
     }
     if is_coal(x, y) {
-        material = Material::COAL;
+        material = Material::Coal;
     }
     material
 }

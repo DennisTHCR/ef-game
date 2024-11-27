@@ -1,9 +1,10 @@
 use bevy::prelude::*;
 
 use crate::structs::{
+    markers::SpawnerMarker,
     plugins::WorldRenderPlugin,
     window::WindowInfo,
-    world::{Material, SpawnerMarker, SpawnerTimer, WorldEntities, WorldMaterials, WorldTextures},
+    world::{Material, SpawnerTimer, WorldEntities, WorldMaterials, WorldTextures},
 };
 
 impl Plugin for WorldRenderPlugin {
@@ -40,13 +41,13 @@ pub fn render_tiles(
                 let material = material_map.get(&(x, y));
                 if material.is_some() {
                     let index = match material.unwrap() {
-                        Material::GRASS => 0,
-                        Material::STONE => 1,
-                        Material::COAL => 2,
-                        Material::IRON => 3,
-                        Material::DIAMOND => 4,
-                        Material::EMERALD => 5,
-                        Material::SPAWNER => 6,
+                        Material::Grass => 0,
+                        Material::Stone => 1,
+                        Material::Coal => 2,
+                        Material::Iron => 3,
+                        Material::Diamond => 4,
+                        Material::Emerald => 5,
+                        Material::Spawner => 6,
                     };
                     texture_atlas.index = index;
                     let mut entity = commands.spawn((

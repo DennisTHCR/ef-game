@@ -1,8 +1,8 @@
 mod generation;
-mod mob_spawning;
+
 
 use crate::structs::{
-    plugins::{MobSpawnPlugin, WorldGenerationPlugin},
+    plugins::WorldGenerationPlugin,
     world::WorldTextures,
 };
 use bevy::prelude::*;
@@ -12,8 +12,7 @@ use crate::structs::plugins::WorldPlugin;
 impl Plugin for WorldPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, init)
-            .add_plugins(WorldGenerationPlugin)
-            .add_plugins(MobSpawnPlugin);
+            .add_plugins(WorldGenerationPlugin);
     }
 }
 
@@ -27,8 +26,8 @@ fn init(
     let texture_atlas_layout_handle = texture_atlases.add(texture_atlas_layout);
     let texture_atlas = TextureAtlas::from(texture_atlas_layout_handle.clone());
     let world_textures = WorldTextures {
-        texture_handle: texture_handle,
-        texture_atlas: texture_atlas,
+        texture_handle,
+        texture_atlas,
     };
     commands.insert_resource(world_textures);
 }

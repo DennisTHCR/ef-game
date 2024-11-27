@@ -31,8 +31,8 @@ fn gather(
     println!("x: {} y: {}", pos.x, pos.y);
     let x = (pos.x / 16.) as i32;
     let y = (pos.y / 16.) as i32;
-    let material = material_map.get(&(x, y)).unwrap().clone();
-    if material == Material::GRASS {
+    let material = *material_map.get(&(x, y)).unwrap();
+    if material == Material::Grass {
         return;
     }
     let resource_map = &mut available_resources.resource_map;
