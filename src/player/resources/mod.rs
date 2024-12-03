@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 use crate::structs::{
-    input::{CursorPos, MouseInput},
+    input::ParsedInput,
     player::AvailableResources,
     plugins::PlayerResourcePlugin,
     world::{Material, WorldMaterials},
@@ -19,15 +19,14 @@ fn init(mut commands: Commands) {
 
 fn gather(
     mut available_resources: ResMut<AvailableResources>,
-    mouse_input: Res<MouseInput>,
-    cursor_position: Res<CursorPos>,
+    parsed_input: Res<ParsedInput>,
     world_materials: Res<WorldMaterials>,
 ) {
-    if !mouse_input.left_click {
+    if !parsed_input.left_click {
         return;
     }
     let material_map = &world_materials.material_map;
-    let pos = cursor_position.0;
+    let pos = parsed_input.cursor_position;
     println!("x: {} y: {}", pos.x, pos.y);
     let x = (pos.x / 16.) as i32;
     let y = (pos.y / 16.) as i32;

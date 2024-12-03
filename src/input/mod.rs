@@ -2,13 +2,19 @@ mod cursor;
 mod keyboard;
 mod mouse;
 
-use crate::structs::plugins::{CursorPlugin, InputPlugin, KeyboardPlugin, MousePlugin};
+use crate::structs::{plugins::{CursorPlugin, InputPlugin, KeyboardPlugin, MousePlugin}, input::ParsedInput};
 use bevy::prelude::*;
 
 impl Plugin for InputPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins(KeyboardPlugin)
+        app
+            .add_systems(Startup, init)
+            .add_plugins(KeyboardPlugin)
             .add_plugins(CursorPlugin)
             .add_plugins(MousePlugin);
     }
+}
+
+fn init(mut commands: Commands) {
+    commands.insert_resource(ParsedInput::default());
 }
