@@ -2,7 +2,10 @@ mod mob_spawning;
 
 use bevy::prelude::*;
 
-use crate::structs::{markers::{EnemyMarker, PlayerMarker}, plugins::{EnemyPlugin, MobSpawnPlugin}};
+use crate::structs::{
+    markers::{EnemyMarker, PlayerMarker},
+    plugins::{EnemyPlugin, MobSpawnPlugin},
+};
 
 impl Plugin for EnemyPlugin {
     fn build(&self, app: &mut App) {

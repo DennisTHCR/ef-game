@@ -9,13 +9,25 @@ pub struct PlayerSettings {
 
 impl Default for PlayerSettings {
     fn default() -> Self {
-        PlayerSettings {
-            speed: 100.,
-        }
+        PlayerSettings { speed: 100. }
     }
 }
 
-#[derive(Resource, Default)]
+#[derive(Resource)]
 pub struct AvailableResources {
     pub resource_map: HashMap<Material, i128>,
+}
+
+impl Default for AvailableResources {
+    fn default() -> Self {
+        AvailableResources {
+            resource_map: HashMap::from_iter([
+                (Material::Stone, 0),
+                (Material::Coal, 0),
+                (Material::Iron, 0),
+                (Material::Diamond, 0),
+                (Material::Emerald, 0),
+            ]),
+        }
+    }
 }

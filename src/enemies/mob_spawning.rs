@@ -4,9 +4,9 @@ use bevy::prelude::*;
 
 use crate::structs::{
     markers::{EnemyMarker, SpawnerMarker},
+    mobs::Health,
     plugins::MobSpawnPlugin,
     world::SpawnerTimer,
-    mobs::Health,
 };
 
 impl Plugin for MobSpawnPlugin {

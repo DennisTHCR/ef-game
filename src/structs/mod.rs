@@ -4,6 +4,6 @@ pub mod markers;
 pub mod mobs;
 pub mod player;
 pub mod plugins;
+pub mod ui;
 pub mod window;
 pub mod world;
-pub mod ui;

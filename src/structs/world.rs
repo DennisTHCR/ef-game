@@ -1,6 +1,7 @@
 use bevy::{prelude::*, utils::HashMap};
+use strum_macros::{Display, EnumIter};
 
-#[derive(Hash, Eq, PartialEq, PartialOrd, Ord, Clone, Copy)]
+#[derive(Hash, Eq, PartialEq, PartialOrd, Ord, Clone, Copy, EnumIter, Display, Component)]
 pub enum Material {
     Grass,
     Spawner,

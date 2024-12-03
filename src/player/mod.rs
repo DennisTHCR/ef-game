@@ -2,7 +2,10 @@ mod movement;
 mod resources;
 
 use crate::structs::{
-    markers::PlayerMarker, mobs::Health, player::PlayerSettings, plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin}
+    markers::PlayerMarker,
+    mobs::Health,
+    player::PlayerSettings,
+    plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin},
 };
 use bevy::prelude::*;
 

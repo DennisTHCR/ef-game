@@ -3,13 +3,13 @@ mod enemies;
 mod input;
 mod player;
 mod structs;
+mod ui;
 mod window;
 mod world;
-mod ui;
 
 use bevy::prelude::*;
 use structs::plugins::{
-    CameraPlugin, EnemyPlugin, InputPlugin, PlayerPlugin, UiPlugin, WindowInfoPlugin, WorldPlugin
+    CameraPlugin, EnemyPlugin, InputPlugin, PlayerPlugin, UiPlugin, WindowInfoPlugin, WorldPlugin,
 };
 
 fn main() {

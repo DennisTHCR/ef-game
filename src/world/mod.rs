@@ -1,10 +1,6 @@
 mod generation;
 
-
-use crate::structs::{
-    plugins::WorldGenerationPlugin,
-    world::WorldTextures,
-};
+use crate::structs::{plugins::WorldGenerationPlugin, world::WorldTextures};
 use bevy::prelude::*;
 
 use crate::structs::plugins::WorldPlugin;
