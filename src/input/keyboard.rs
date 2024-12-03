@@ -4,8 +4,7 @@ use crate::structs::{input::ParsedInput, plugins::KeyboardPlugin};
 
 impl Plugin for KeyboardPlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_systems(Update, update);
+        app.add_systems(Update, update);
     }
 }
 

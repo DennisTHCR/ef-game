@@ -3,10 +3,7 @@ use std::f32::consts::PI;
 use bevy::prelude::*;
 
 use crate::structs::{
-    camera::CameraSettings,
-    input::ParsedInput,
-    markers::PlayerMarker,
-    player::PlayerSettings,
+    camera::CameraSettings, input::ParsedInput, markers::PlayerMarker, player::PlayerSettings,
     plugins::PlayerMovementPlugin,
 };
 

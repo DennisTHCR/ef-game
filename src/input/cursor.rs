@@ -4,8 +4,7 @@ use crate::structs::{input::ParsedInput, markers::MainCamera, plugins::CursorPlu
 
 impl Plugin for CursorPlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_systems(Update, update_cursor_resource);
+        app.add_systems(Update, update_cursor_resource);
     }
 }
 

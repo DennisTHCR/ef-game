@@ -27,7 +27,6 @@ fn gather(
     }
     let material_map = &world_materials.material_map;
     let pos = parsed_input.cursor_position;
-    println!("x: {} y: {}", pos.x, pos.y);
     let x = (pos.x / 16.) as i32;
     let y = (pos.y / 16.) as i32;
     let material = *material_map.get(&(x, y)).unwrap();
@@ -39,5 +38,4 @@ fn gather(
         resource_map.insert(material, 0);
     }
     resource_map.insert(material, resource_map[&material] + 1);
-    println!("WOAH");
 }

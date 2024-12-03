@@ -2,12 +2,14 @@ use bevy::prelude::*;
 use strum::IntoEnumIterator;
 
 use crate::structs::{
-    input::ParsedInput, player::AvailableResources, plugins::UiPlugin, ui::MaterialsDisplay, world::Material
+    input::ParsedInput, player::AvailableResources, plugins::UiPlugin, ui::MaterialsDisplay,
+    world::Material,
 };
 
 impl Plugin for UiPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, init).add_systems(Update, (update, toggle_inventory));
+        app.add_systems(Startup, init)
+            .add_systems(Update, (update, toggle_inventory));
     }
 }
 
@@ -61,7 +63,10 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
         });
 }
 
-fn toggle_inventory(keyboard_input: Res<ParsedInput>, mut material_display: Query<&mut Visibility, With<MaterialsDisplay>>) {
+fn toggle_inventory(
+    keyboard_input: Res<ParsedInput>,
+    mut material_display: Query<&mut Visibility, With<MaterialsDisplay>>,
+) {
     if keyboard_input.toggle_inventory {
         *material_display.single_mut() = match *material_display.single() {
             Visibility::Hidden => Visibility::Inherited,
@@ -84,14 +89,8 @@ fn update(
     };
     children.single().iter().for_each(|&child| {
         let (mut text, material) = text_boxes.get_mut(child).unwrap();
-        let amount = available_resources
-            .resource_map
-            .get(material)
-            .unwrap();
-        text.sections[1] = TextSection::new(
-            amount.to_string(),
-            text_style.clone(),
-        );
+        let amount = available_resources.resource_map.get(material).unwrap();
+        text.sections[1] = TextSection::new(amount.to_string(), text_style.clone());
         let color;
         if *amount == 0 {
             color = Color::srgba(0.0, 0.0, 0.0, 0.0);

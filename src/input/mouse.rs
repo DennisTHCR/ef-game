@@ -4,8 +4,7 @@ use crate::structs::{input::ParsedInput, plugins::MousePlugin};
 
 impl Plugin for MousePlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_systems(Update, (read_mouse_wheel, read_mouse_clicks));
+        app.add_systems(Update, (read_mouse_wheel, read_mouse_clicks));
     }
 }
 
