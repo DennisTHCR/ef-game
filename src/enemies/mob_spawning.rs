@@ -6,6 +6,7 @@ use crate::structs::{
     markers::{EnemyMarker, SpawnerMarker},
     plugins::MobSpawnPlugin,
     world::SpawnerTimer,
+    mobs::Health,
 };
 
 impl Plugin for MobSpawnPlugin {
@@ -27,7 +28,7 @@ fn tick_spawners(
             new_transform.translation.z = -0.5;
             commands.spawn((
                 SpriteBundle {
-                    texture: asset_server.load("enemy.png"),
+                    texture: asset_server.load("textures/enemy.png"),
                     transform: new_transform,
                     ..default()
                 },

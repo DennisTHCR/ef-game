@@ -18,7 +18,7 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.insert_resource(PlayerSettings::default());
     commands.spawn((
         SpriteBundle {
-            texture: asset_server.load("player.png"),
+            texture: asset_server.load("textures/player.png"),
             ..default()
         },
         PlayerMarker,

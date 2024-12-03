@@ -5,10 +5,11 @@ mod player;
 mod structs;
 mod window;
 mod world;
+mod ui;
 
 use bevy::prelude::*;
 use structs::plugins::{
-    CameraPlugin, EnemyPlugin, InputPlugin, PlayerPlugin, WindowInfoPlugin, WorldPlugin,
+    CameraPlugin, EnemyPlugin, InputPlugin, PlayerPlugin, UiPlugin, WindowInfoPlugin, WorldPlugin
 };
 
 fn main() {
@@ -21,6 +22,7 @@ fn main() {
             WorldPlugin,
             WindowInfoPlugin,
             EnemyPlugin,
+            UiPlugin,
         ))
         .run();
 }

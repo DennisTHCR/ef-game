@@ -21,7 +21,7 @@ fn init(
     asset_server: Res<AssetServer>,
     mut texture_atlases: ResMut<Assets<TextureAtlasLayout>>,
 ) {
-    let texture_handle = asset_server.load("sprite_sheet.png");
+    let texture_handle = asset_server.load("textures/sprite_sheet.png");
     let texture_atlas_layout = TextureAtlasLayout::from_grid(UVec2::splat(16), 8, 8, None, None);
     let texture_atlas_layout_handle = texture_atlases.add(texture_atlas_layout);
     let texture_atlas = TextureAtlas::from(texture_atlas_layout_handle.clone());
