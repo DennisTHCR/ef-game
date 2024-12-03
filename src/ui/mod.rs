@@ -2,12 +2,12 @@ use bevy::prelude::*;
 use strum::IntoEnumIterator;
 
 use crate::structs::{
-    player::AvailableResources, plugins::UiPlugin, ui::MaterialsDisplay, world::Material,
+    input::KeyboardInput, player::AvailableResources, plugins::UiPlugin, ui::MaterialsDisplay, world::Material
 };
 
 impl Plugin for UiPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, init).add_systems(Update, update);
+        app.add_systems(Startup, init).add_systems(Update, (update, toggle_inventory));
     }
 }
 
@@ -59,6 +59,16 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
                     });
                 });
         });
+}
+
+fn toggle_inventory(keyboard_input: Res<KeyboardInput>, mut material_display: Query<&mut Visibility, With<MaterialsDisplay>>) {
+    if keyboard_input.toggle_inventory {
+        *material_display.single_mut() = match *material_display.single() {
+            Visibility::Hidden => Visibility::Inherited,
+            Visibility::Inherited => Visibility::Hidden,
+            Visibility::Visible => Visibility::Hidden,
+        }
+    }
 }
 
 fn update(

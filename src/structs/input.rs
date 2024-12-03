@@ -6,6 +6,7 @@ pub struct CursorPos(pub Vec2);
 #[derive(Resource, Default)]
 pub struct KeyboardInput {
     pub direction: Vec2,
+    pub toggle_inventory: bool,
 }
 
 #[derive(Resource, Default)]
