@@ -74,13 +74,22 @@ fn update(
     };
     children.single().iter().for_each(|&child| {
         let (mut text, material) = text_boxes.get_mut(child).unwrap();
+        let amount = available_resources
+            .resource_map
+            .get(material)
+            .unwrap();
         text.sections[1] = TextSection::new(
-            available_resources
-                .resource_map
-                .get(material)
-                .unwrap()
-                .to_string(),
+            amount.to_string(),
             text_style.clone(),
         );
+        let color;
+        if *amount == 0 {
+            color = Color::srgb(0.3, 0.3, 0.3);
+        } else {
+            color = Color::srgb(1.0, 1.0, 1.0);
+        }
+        for section in &mut text.sections {
+            section.style.color = color;
+        }
     });
 }
