@@ -84,7 +84,7 @@ fn update(
         );
         let color;
         if *amount == 0 {
-            color = Color::srgb(0.3, 0.3, 0.3);
+            color = Color::srgba(0.0, 0.0, 0.0, 0.0);
         } else {
             color = Color::srgb(1.0, 1.0, 1.0);
         }
