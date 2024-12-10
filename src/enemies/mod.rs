@@ -3,7 +3,7 @@ mod mob_spawning;
 use bevy::prelude::*;
 
 use crate::structs::{
-    markers::{EnemyMarker, PlayerMarker}, mobs::Health, plugins::{EnemyPlugin, MobSpawnPlugin}
+    markers::{EnemyMarker, PlayerMarker}, mobs::{AttackTimer, Health}, plugins::{EnemyPlugin, MobSpawnPlugin}
 };
 
 impl Plugin for EnemyPlugin {
@@ -27,15 +27,22 @@ fn move_enemies(
 }
 
 fn damage_player(
-    enemies: Query<&Transform, (With<EnemyMarker>, Without<PlayerMarker>)>,
+    mut enemies: Query<(&Transform, &mut AttackTimer), (With<EnemyMarker>, Without<PlayerMarker>)>,
     mut player: Query<(&mut Health, &Transform), (With<PlayerMarker>, Without<EnemyMarker>)>,
+    time: Res<Time>,
 ) {
     let player_translation = player.single().1.translation;
-    enemies.iter().for_each(|enemy_transform| {
+    enemies.iter_mut().for_each(|(enemy_transform, mut attack_timer)| {
+        attack_timer.0.tick(time.delta());
         let diff = enemy_transform.translation - player_translation;
         if diff.length() <= 20. {
-            player.single_mut().0.current_health -= 1;
-            println!("Player Health: {}", player.single_mut().0.current_health);
+            if attack_timer.0.just_finished() {
+                player.single_mut().0.current_health -= 1;
+                println!("Player Health: {}", player.single_mut().0.current_health);
+                attack_timer.0.reset();
+            }
+        } else {
+            attack_timer.0.reset();
         }
     });
 }

@@ -3,7 +3,7 @@ use std::time::Duration;
 use bevy::prelude::*;
 
 use crate::structs::{
-    assets::TextureHandles, markers::{EnemyMarker, SpawnerMarker}, mobs::Health, plugins::MobSpawnPlugin, world::SpawnerTimer
+    assets::TextureHandles, markers::{EnemyMarker, SpawnerMarker}, mobs::{AttackTimer, Health}, plugins::MobSpawnPlugin, world::SpawnerTimer
 };
 
 impl Plugin for MobSpawnPlugin {
@@ -31,6 +31,7 @@ fn tick_spawners(
                 },
                 EnemyMarker,
                 Health::default_mob(),
+                AttackTimer::default(),
             ));
         }
     });
