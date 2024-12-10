@@ -41,6 +41,7 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
                             flex_direction: FlexDirection::Column,
                             ..default()
                         },
+                        visibility: Visibility::Hidden,
                         background_color: Color::srgba(0.0, 0.0, 0.0, 0.9).into(),
                         border_color: Color::srgba(0.0, 0.0, 0.0, 0.9).into(),
                         ..default()

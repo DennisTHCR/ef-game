@@ -3,10 +3,7 @@ use std::time::Duration;
 use bevy::prelude::*;
 
 use crate::structs::{
-    markers::{EnemyMarker, SpawnerMarker},
-    mobs::Health,
-    plugins::MobSpawnPlugin,
-    world::SpawnerTimer,
+    assets::TextureHandles, markers::{EnemyMarker, SpawnerMarker}, mobs::Health, plugins::MobSpawnPlugin, world::SpawnerTimer
 };
 
 impl Plugin for MobSpawnPlugin {
@@ -19,7 +16,7 @@ fn tick_spawners(
     mut spawners: Query<(&mut SpawnerTimer, &Transform), With<SpawnerMarker>>,
     time: Res<Time>,
     mut commands: Commands,
-    asset_server: Res<AssetServer>,
+    texture_handles: Res<TextureHandles>,
 ) {
     spawners.iter_mut().for_each(|(mut timer, &transform)| {
         timer.0.tick(Duration::from_secs_f32(time.delta_seconds()));
@@ -28,7 +25,7 @@ fn tick_spawners(
             new_transform.translation.z = -0.5;
             commands.spawn((
                 SpriteBundle {
-                    texture: asset_server.load("textures/enemy.png"),
+                    texture: texture_handles.enemy_sprite.clone(),
                     transform: new_transform,
                     ..default()
                 },
