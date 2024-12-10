@@ -2,9 +2,9 @@ use bevy::prelude::*;
 
 #[derive(Component)]
 pub struct Health {
-    max_health: i32,
-    current_health: i32,
-    regeneration: i32,
+    pub max_health: i32,
+    pub current_health: i32,
+    pub regeneration: i32,
 }
 
 impl Default for Health {
