@@ -1,3 +1,4 @@
+pub struct AssetPlugin;
 pub struct PlayerPlugin;
 pub struct PlayerMovementPlugin;
 pub struct PlayerResourcePlugin;

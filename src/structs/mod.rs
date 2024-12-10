@@ -7,3 +7,4 @@ pub mod plugins;
 pub mod ui;
 pub mod window;
 pub mod world;
+pub mod assets;
