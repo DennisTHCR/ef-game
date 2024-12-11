@@ -5,3 +5,6 @@ pub struct MaterialsDisplay;
 
 #[derive(Component)]
 pub struct StatusDisplay;
+
+#[derive(Component)]
+pub struct HealthDisplay;

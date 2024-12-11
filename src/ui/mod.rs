@@ -5,7 +5,7 @@ use crate::structs::{
     input::ParsedInput,
     player::AvailableResources,
     plugins::UiPlugin,
-    ui::{MaterialsDisplay, StatusDisplay},
+    ui::{HealthDisplay, MaterialsDisplay, StatusDisplay},
     world::Material,
 };
 
@@ -79,7 +79,16 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
                     ..default()
                 },
                 StatusDisplay,
-            ));
+            ))
+            .with_children(|parent| {
+                parent.spawn((
+                    TextBundle::from_sections([
+                        TextSection::new("HP: ", text_style.clone()),
+                        TextSection::new("", text_style.clone()),
+                    ]),
+                    HealthDisplay,
+                ));
+            });
         });
 }
 
