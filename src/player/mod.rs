@@ -1,9 +1,16 @@
 mod movement;
 mod resources;
 
-use crate::{assets::init_textures, structs::{
-    assets::TextureHandles, markers::PlayerMarker, mobs::Health, player::PlayerSettings, plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin}
-}};
+use crate::{
+    assets::init_textures,
+    structs::{
+        assets::TextureHandles,
+        markers::PlayerMarker,
+        mobs::Health,
+        player::PlayerSettings,
+        plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin},
+    },
+};
 use bevy::prelude::*;
 
 impl Plugin for PlayerPlugin {

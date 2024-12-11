@@ -4,12 +4,14 @@ use crate::structs::{
     input::ParsedInput,
     player::AvailableResources,
     plugins::PlayerResourcePlugin,
+    state::GameState,
     world::{Material, WorldMaterials},
 };
 
 impl Plugin for PlayerResourcePlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, init).add_systems(Update, gather);
+        app.add_systems(Startup, init)
+            .add_systems(Update, gather.run_if(in_state(GameState::Playing)));
     }
 }
 

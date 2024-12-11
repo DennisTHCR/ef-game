@@ -4,12 +4,15 @@ use bevy::prelude::*;
 
 use crate::structs::{
     camera::CameraSettings, input::ParsedInput, markers::PlayerMarker, player::PlayerSettings,
-    plugins::PlayerMovementPlugin,
+    plugins::PlayerMovementPlugin, state::GameState,
 };
 
 impl Plugin for PlayerMovementPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, (handle_keyboard, handle_mouse));
+        app.add_systems(
+            Update,
+            (handle_keyboard, handle_mouse).run_if(in_state(GameState::Playing)),
+        );
     }
 }
 

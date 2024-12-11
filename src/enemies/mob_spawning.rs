@@ -3,12 +3,17 @@ use std::time::Duration;
 use bevy::prelude::*;
 
 use crate::structs::{
-    assets::TextureHandles, markers::{EnemyMarker, SpawnerMarker}, mobs::{AttackTimer, Health}, plugins::MobSpawnPlugin, world::SpawnerTimer
+    assets::TextureHandles,
+    markers::{EnemyMarker, SpawnerMarker},
+    mobs::{AttackTimer, Health},
+    plugins::MobSpawnPlugin,
+    state::GameState,
+    world::SpawnerTimer,
 };
 
 impl Plugin for MobSpawnPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, tick_spawners);
+        app.add_systems(Update, tick_spawners.run_if(in_state(GameState::Playing)));
     }
 }
 

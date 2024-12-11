@@ -31,9 +31,7 @@ impl Health {
 pub struct AttackTimer(pub Timer);
 
 impl Default for AttackTimer {
-        fn default() -> Self {
-            AttackTimer(
-            Timer::from_seconds(5.0, TimerMode::Once)
-        )
+    fn default() -> Self {
+        AttackTimer(Timer::from_seconds(5.0, TimerMode::Once))
     }
 }

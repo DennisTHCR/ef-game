@@ -2,7 +2,10 @@ use bevy::prelude::*;
 use strum::IntoEnumIterator;
 
 use crate::structs::{
-    input::ParsedInput, player::AvailableResources, plugins::UiPlugin, ui::MaterialsDisplay,
+    input::ParsedInput,
+    player::AvailableResources,
+    plugins::UiPlugin,
+    ui::{MaterialsDisplay, StatusDisplay},
     world::Material,
 };
 
@@ -61,6 +64,22 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
                         }
                     });
                 });
+            parent.spawn((
+                NodeBundle {
+                    style: Style {
+                        width: Val::Px(250.0),
+                        height: Val::Px(150.0),
+                        border: UiRect::all(Val::Px(10.)),
+                        flex_direction: FlexDirection::Column,
+                        align_self: AlignSelf::End,
+                        ..default()
+                    },
+                    background_color: Color::srgba(0.0, 0.0, 0.0, 0.9).into(),
+                    border_color: Color::srgba(0.0, 0.0, 0.0, 0.9).into(),
+                    ..default()
+                },
+                StatusDisplay,
+            ));
         });
 }
 
