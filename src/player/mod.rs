@@ -32,7 +32,13 @@ fn init(mut commands: Commands, texture_handles: Res<TextureHandles>) {
         },
         PlayerMarker,
         Health::default(),
-    ));
+    )).with_children(|parent| {
+        parent.spawn(SpriteBundle {
+            texture: texture_handles.sword_sprite.clone(),
+            transform: Transform::from_scale(Vec3::splat(0.5)).with_translation(Vec3::new(10., 10.,0.)).with_rotation(Quat::from_rotation_z(-0.5)),
+            ..default()
+        });
+    });
 }
 
 fn update_health(
