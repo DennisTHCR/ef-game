@@ -1,5 +1,6 @@
 mod movement;
 mod resources;
+mod combat;
 
 use crate::{
     assets::init_textures,
@@ -7,8 +8,8 @@ use crate::{
         assets::TextureHandles,
         markers::PlayerMarker,
         mobs::Health,
-        player::PlayerSettings,
-        plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin},
+        player::{PlayerSettings, WeaponMarker},
+        plugins::{PlayerCombatPlugin, PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin},
         ui::HealthDisplay,
     },
 };
@@ -18,6 +19,7 @@ impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins(PlayerMovementPlugin)
             .add_plugins(PlayerResourcePlugin)
+            .add_plugins(PlayerCombatPlugin)
             .add_systems(Startup, init.after(init_textures))
             .add_systems(Update, update_health);
     }
@@ -33,11 +35,13 @@ fn init(mut commands: Commands, texture_handles: Res<TextureHandles>) {
         PlayerMarker,
         Health::default(),
     )).with_children(|parent| {
-        parent.spawn(SpriteBundle {
+        parent.spawn((SpriteBundle {
             texture: texture_handles.sword_sprite.clone(),
-            transform: Transform::from_scale(Vec3::splat(0.5)).with_translation(Vec3::new(10., 10.,0.)).with_rotation(Quat::from_rotation_z(-0.5)),
+            transform: Transform::from_scale(Vec3::splat(0.5)).with_translation(Vec3::new(-14., 4.,0.)).with_rotation(Quat::from_rotation_z(-0.6)),
             ..default()
-        });
+        },
+        WeaponMarker,
+    ));
     });
 }
 
