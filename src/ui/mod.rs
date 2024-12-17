@@ -2,17 +2,13 @@ use bevy::prelude::*;
 use strum::IntoEnumIterator;
 
 use crate::structs::{
-    input::ParsedInput,
-    player::AvailableResources,
-    plugins::UiPlugin,
-    ui::{HealthDisplay, MaterialsDisplay, StatusDisplay},
-    world::Material,
+    input::ParsedInput, mobs::EnemiesAlive, player::AvailableResources, plugins::UiPlugin, ui::{EnemyDisplay, HealthDisplay, MaterialsDisplay, StatusDisplay}, world::Material
 };
 
 impl Plugin for UiPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, init)
-            .add_systems(Update, (update, toggle_inventory));
+            .add_systems(Update, (update_material_display, update_enemies_alive, toggle_inventory));
     }
 }
 
@@ -88,6 +84,13 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
                     ]),
                     HealthDisplay,
                 ));
+                parent.spawn((
+                    TextBundle::from_sections([
+                        TextSection::new("Enemies: ", text_style.clone()),
+                        TextSection::new("", text_style.clone()),
+                    ]),
+                    EnemyDisplay,
+                ));
             });
         });
 }
@@ -105,7 +108,7 @@ fn toggle_inventory(
     }
 }
 
-fn update(
+fn update_material_display(
     children: Query<&Children, With<MaterialsDisplay>>,
     mut text_boxes: Query<(&mut Text, &Material)>,
     asset_server: Res<AssetServer>,
@@ -130,4 +133,11 @@ fn update(
             section.style.color = color;
         }
     });
+}
+
+fn update_enemies_alive(
+    mut text_box: Query<&mut Text, With<EnemyDisplay>>,
+    enemies_alive: Res<EnemiesAlive>,
+) {
+    text_box.single_mut().sections[1].value = enemies_alive.0.to_string();
 }

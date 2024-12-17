@@ -20,8 +20,8 @@ impl Default for Health {
 impl Health {
     pub fn default_mob() -> Self {
         Health {
-            max_health: 10,
-            current_health: 10,
+            max_health: 2,
+            current_health: 2,
             ..default()
         }
     }
@@ -32,6 +32,18 @@ pub struct AttackTimer(pub Timer);
 
 impl Default for AttackTimer {
     fn default() -> Self {
-        AttackTimer(Timer::from_seconds(5.0, TimerMode::Once))
+        AttackTimer(Timer::from_seconds(2.0, TimerMode::Once))
     }
 }
+
+#[derive(Component)]
+pub struct DeathTimer(pub Timer);
+
+impl Default for DeathTimer {
+    fn default() -> Self {
+        DeathTimer(Timer::from_seconds(0.2, TimerMode::Once))
+    }
+}
+
+#[derive(Resource)]
+pub struct EnemiesAlive(pub i32);

@@ -5,7 +5,7 @@ use bevy::prelude::*;
 use crate::structs::{
     assets::TextureHandles,
     markers::{EnemyMarker, SpawnerMarker},
-    mobs::{AttackTimer, Health},
+    mobs::{AttackTimer, EnemiesAlive, Health},
     plugins::MobSpawnPlugin,
     state::GameState,
     world::SpawnerTimer,
@@ -13,8 +13,13 @@ use crate::structs::{
 
 impl Plugin for MobSpawnPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, tick_spawners.run_if(in_state(GameState::Playing)));
+        app.add_systems(Update, tick_spawners.run_if(in_state(GameState::Playing)))
+            .add_systems(Startup, init);
     }
+}
+
+fn init(mut commands: Commands) {
+    commands.insert_resource(EnemiesAlive(0));
 }
 
 fn tick_spawners(
@@ -22,6 +27,7 @@ fn tick_spawners(
     time: Res<Time>,
     mut commands: Commands,
     texture_handles: Res<TextureHandles>,
+    mut enemies_alive: ResMut<EnemiesAlive>,
 ) {
     spawners.iter_mut().for_each(|(mut timer, &transform)| {
         timer.0.tick(Duration::from_secs_f32(time.delta_seconds()));
@@ -38,6 +44,7 @@ fn tick_spawners(
                 Health::default_mob(),
                 AttackTimer::default(),
             ));
+            enemies_alive.0 += 1;
         }
     });
 }
