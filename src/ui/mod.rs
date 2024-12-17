@@ -2,13 +2,24 @@ use bevy::prelude::*;
 use strum::IntoEnumIterator;
 
 use crate::structs::{
-    input::ParsedInput, mobs::EnemiesAlive, player::AvailableResources, plugins::UiPlugin, ui::{EnemyDisplay, HealthDisplay, MaterialsDisplay, StatusDisplay}, world::Material
+    input::ParsedInput,
+    mobs::EnemiesAlive,
+    player::AvailableResources,
+    plugins::UiPlugin,
+    ui::{EnemyDisplay, HealthDisplay, MaterialsDisplay, StatusDisplay},
+    world::Material,
 };
 
 impl Plugin for UiPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, init)
-            .add_systems(Update, (update_material_display, update_enemies_alive, toggle_inventory));
+        app.add_systems(Startup, init).add_systems(
+            Update,
+            (
+                update_material_display,
+                update_enemies_alive,
+                toggle_inventory,
+            ),
+        );
     }
 }
 
@@ -60,38 +71,39 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
                         }
                     });
                 });
-            parent.spawn((
-                NodeBundle {
-                    style: Style {
-                        width: Val::Px(250.0),
-                        height: Val::Px(150.0),
-                        border: UiRect::all(Val::Px(10.)),
-                        flex_direction: FlexDirection::Column,
-                        align_self: AlignSelf::End,
+            parent
+                .spawn((
+                    NodeBundle {
+                        style: Style {
+                            width: Val::Px(250.0),
+                            height: Val::Px(150.0),
+                            border: UiRect::all(Val::Px(10.)),
+                            flex_direction: FlexDirection::Column,
+                            align_self: AlignSelf::End,
+                            ..default()
+                        },
+                        background_color: Color::srgba(0.0, 0.0, 0.0, 0.9).into(),
+                        border_color: Color::srgba(0.0, 0.0, 0.0, 0.9).into(),
                         ..default()
                     },
-                    background_color: Color::srgba(0.0, 0.0, 0.0, 0.9).into(),
-                    border_color: Color::srgba(0.0, 0.0, 0.0, 0.9).into(),
-                    ..default()
-                },
-                StatusDisplay,
-            ))
-            .with_children(|parent| {
-                parent.spawn((
-                    TextBundle::from_sections([
-                        TextSection::new("HP: ", text_style.clone()),
-                        TextSection::new("", text_style.clone()),
-                    ]),
-                    HealthDisplay,
-                ));
-                parent.spawn((
-                    TextBundle::from_sections([
-                        TextSection::new("Enemies: ", text_style.clone()),
-                        TextSection::new("", text_style.clone()),
-                    ]),
-                    EnemyDisplay,
-                ));
-            });
+                    StatusDisplay,
+                ))
+                .with_children(|parent| {
+                    parent.spawn((
+                        TextBundle::from_sections([
+                            TextSection::new("HP: ", text_style.clone()),
+                            TextSection::new("", text_style.clone()),
+                        ]),
+                        HealthDisplay,
+                    ));
+                    parent.spawn((
+                        TextBundle::from_sections([
+                            TextSection::new("Enemies: ", text_style.clone()),
+                            TextSection::new("", text_style.clone()),
+                        ]),
+                        EnemyDisplay,
+                    ));
+                });
         });
 }
 

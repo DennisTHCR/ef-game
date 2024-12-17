@@ -8,7 +8,8 @@ use crate::{
         markers::PlayerMarker,
         mobs::Health,
         player::PlayerSettings,
-        plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin}, ui::HealthDisplay,
+        plugins::{PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin},
+        ui::HealthDisplay,
     },
 };
 use bevy::prelude::*;

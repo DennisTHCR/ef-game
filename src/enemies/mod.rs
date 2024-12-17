@@ -30,23 +30,26 @@ fn move_enemies(
         let diff_normalized = diff.normalize_or_zero();
         let mut movement = diff_normalized * time.delta_seconds() * -80.0;
         if diff.length() <= 100. {
-            movement += diff_normalized * time.delta_seconds() * (2000. / diff.length()).clamp(0., 200.); 
+            movement +=
+                diff_normalized * time.delta_seconds() * (2000. / diff.length()).clamp(0., 200.);
         }
         enemy_transform.translation += movement;
     });
 }
 
 fn damage_player(
-    mut enemies: Query<(&mut Transform, &mut AttackTimer, &mut Health, Entity), (With<EnemyMarker>, Without<PlayerMarker>)>,
+    mut enemies: Query<
+        (&mut Transform, &mut AttackTimer, &mut Health, Entity),
+        (With<EnemyMarker>, Without<PlayerMarker>),
+    >,
     mut player: Query<(&mut Health, &Transform), (With<PlayerMarker>, Without<EnemyMarker>)>,
     mut next_state: ResMut<NextState<GameState>>,
     time: Res<Time>,
     mut commands: Commands,
 ) {
     let player_translation = player.single().1.translation;
-    enemies
-        .iter_mut()
-        .for_each(|(mut enemy_transform, mut attack_timer, mut health, entity)| {
+    enemies.iter_mut().for_each(
+        |(mut enemy_transform, mut attack_timer, mut health, entity)| {
             attack_timer.0.tick(time.delta());
             let diff = enemy_transform.translation - player_translation;
             if diff.length() <= 30. {
@@ -66,7 +69,8 @@ fn damage_player(
             } else {
                 attack_timer.0.reset();
             }
-        });
+        },
+    );
 }
 
 fn tick_death_timer(
@@ -74,11 +78,13 @@ fn tick_death_timer(
     mut commands: Commands,
     time: Res<Time>,
 ) {
-    enemies.iter_mut().for_each(|(mut death_timer, entity, mut sprite)| {
-        death_timer.0.tick(time.delta());
-        if death_timer.0.just_finished() {
-            commands.entity(entity).remove::<EnemyMarker>();
-            sprite.color = Color::srgba(0.2, 0.2, 0.2, 0.2);
-        }
-    });
+    enemies
+        .iter_mut()
+        .for_each(|(mut death_timer, entity, mut sprite)| {
+            death_timer.0.tick(time.delta());
+            if death_timer.0.just_finished() {
+                commands.entity(entity).remove::<EnemyMarker>();
+                sprite.color = Color::srgba(0.2, 0.2, 0.2, 0.2);
+            }
+        });
 }
