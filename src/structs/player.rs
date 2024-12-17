@@ -1,4 +1,6 @@
-use bevy::{prelude::Resource, utils::HashMap};
+use std::collections::HashMap;
+
+use bevy::prelude::*;
 
 use super::world::Material;
 
@@ -31,3 +33,6 @@ impl Default for AvailableResources {
         }
     }
 }
+
+#[derive(Component)]
+pub struct WeaponMarker;

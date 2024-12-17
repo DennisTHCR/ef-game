@@ -23,5 +23,6 @@ pub fn init_textures(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.insert_resource(TextureHandles {
         player_sprite: asset_server.load(texture_path.join("player.png")),
         enemy_sprite: asset_server.load(texture_path.join("enemy.png")),
+        sword_sprite: asset_server.load(texture_path.join("weapons").join("sword.png")),
     });
 }

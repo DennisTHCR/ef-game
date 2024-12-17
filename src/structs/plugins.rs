@@ -1,6 +1,7 @@
 pub struct AssetPlugin;
 pub struct PlayerPlugin;
 pub struct PlayerMovementPlugin;
+pub struct PlayerCombatPlugin;
 pub struct PlayerResourcePlugin;
 pub struct CameraPlugin;
 pub struct CameraMovementPlugin;

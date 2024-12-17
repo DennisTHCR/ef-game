@@ -9,4 +9,5 @@ pub struct MeshHandles {
 pub struct TextureHandles {
     pub player_sprite: Handle<Image>,
     pub enemy_sprite: Handle<Image>,
+    pub sword_sprite: Handle<Image>,
 }
