@@ -1,10 +1,11 @@
 use bevy::prelude::*;
 
 use crate::structs::{
+    assets::TextureHandles,
     markers::SpawnerMarker,
     plugins::WorldRenderPlugin,
     window::WindowInfo,
-    world::{Material, SpawnerTimer, WorldEntities, WorldMaterials, WorldTextures},
+    world::{Material, SpawnerTimer, WorldEntities, WorldMaterials, WorldTextureAtlas},
 };
 
 impl Plugin for WorldRenderPlugin {
@@ -22,8 +23,9 @@ pub fn render_tiles(
     mut commands: Commands,
     window_info: Res<WindowInfo>,
     mut world_entities: ResMut<WorldEntities>,
-    world_textures: Res<WorldTextures>,
+    world_texture_atlas: Res<WorldTextureAtlas>,
     world_materials: Res<WorldMaterials>,
+    texture_handles: Res<TextureHandles>,
 ) {
     let material_map = &world_materials.material_map;
     let entity_map = &mut world_entities.entity_map;
@@ -36,8 +38,8 @@ pub fn render_tiles(
     for y in end_y - 8..=start_y + 8 {
         for x in start_x - 8..=end_x + 8 {
             if entity_map.get(&(x, y)).is_none() {
-                let texture_handle = world_textures.texture_handle.clone();
-                let mut texture_atlas = world_textures.texture_atlas.clone();
+                let texture_handle = texture_handles.world_sprites.clone();
+                let mut texture_atlas = world_texture_atlas.0.clone();
                 let material = material_map.get(&(x, y));
                 if material.is_some() {
                     let index = match material.unwrap() {

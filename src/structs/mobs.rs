@@ -47,3 +47,9 @@ impl Default for DeathTimer {
 
 #[derive(Resource)]
 pub struct EnemiesAlive(pub i32);
+
+#[derive(Component, Default)]
+pub struct Velocity(pub Vec2);
+
+#[derive(Component, Default)]
+pub struct Acceleration(pub Vec2);

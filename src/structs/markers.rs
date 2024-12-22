@@ -8,3 +8,5 @@ pub struct MainCamera;
 pub struct EnemyMarker;
 #[derive(Component)]
 pub struct SpawnerMarker;
+#[derive(Component)]
+pub struct ToolMarker;

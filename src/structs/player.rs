@@ -5,13 +5,23 @@ use bevy::prelude::*;
 use super::world::Material;
 
 #[derive(Resource)]
-pub struct PlayerSettings {
-    pub speed: f32,
+pub struct PlayerStats {
+    pub max_speed: f32,
+    pub selected_tool: i32,
+    pub mining_range: f32,
+    pub punch_range: f32,
+    pub mining_level: i32,
 }
 
-impl Default for PlayerSettings {
+impl Default for PlayerStats {
     fn default() -> Self {
-        PlayerSettings { speed: 100. }
+        PlayerStats {
+            max_speed: 100.,
+            selected_tool: 0,
+            mining_range: 20.,
+            punch_range: 20.,
+            mining_level: 0,
+        }
     }
 }
 
@@ -34,5 +44,5 @@ impl Default for AvailableResources {
     }
 }
 
-#[derive(Component)]
-pub struct WeaponMarker;
+#[derive(Resource)]
+pub struct PlayerEquipmentAtlas(pub TextureAtlas);

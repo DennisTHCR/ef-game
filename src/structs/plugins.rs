@@ -17,3 +17,4 @@ pub struct WindowInfoPlugin;
 pub struct EnemyPlugin;
 pub struct UiPlugin;
 pub struct StatePlugin;
+pub struct MovementPlugin;

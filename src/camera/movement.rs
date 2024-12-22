@@ -18,4 +18,7 @@ fn follow_player(
 ) {
     let delta_pos = camera_transform.single().translation - player_transform.single().translation;
     camera_transform.single_mut().translation -= delta_pos * time.delta_seconds();
+    if delta_pos.length() <= time.delta_seconds() {
+        camera_transform.single_mut().translation = player_transform.single().translation;
+    }
 }

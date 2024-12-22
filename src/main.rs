@@ -2,6 +2,7 @@ mod assets;
 mod camera;
 mod enemies;
 mod input;
+mod movement;
 mod player;
 mod state;
 mod structs;
@@ -11,8 +12,8 @@ mod world;
 
 use bevy::prelude::*;
 use structs::plugins::{
-    AssetPlugin, CameraPlugin, EnemyPlugin, InputPlugin, PlayerPlugin, StatePlugin, UiPlugin,
-    WindowInfoPlugin, WorldPlugin,
+    AssetPlugin, CameraPlugin, EnemyPlugin, InputPlugin, MovementPlugin, PlayerPlugin, StatePlugin,
+    UiPlugin, WindowInfoPlugin, WorldPlugin,
 };
 
 fn main() {
@@ -28,6 +29,7 @@ fn main() {
             EnemyPlugin,
             UiPlugin,
             StatePlugin,
+            MovementPlugin,
         ))
         .run();
 }

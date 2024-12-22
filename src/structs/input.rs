@@ -8,4 +8,5 @@ pub struct ParsedInput {
     pub scroll_up: bool,
     pub scroll_down: bool,
     pub left_click: bool,
+    pub selected_tool: i32,
 }

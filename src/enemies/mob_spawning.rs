@@ -5,7 +5,7 @@ use bevy::prelude::*;
 use crate::structs::{
     assets::TextureHandles,
     markers::{EnemyMarker, SpawnerMarker},
-    mobs::{AttackTimer, EnemiesAlive, Health},
+    mobs::{Acceleration, AttackTimer, EnemiesAlive, Health, Velocity},
     plugins::MobSpawnPlugin,
     state::GameState,
     world::SpawnerTimer,
@@ -43,6 +43,8 @@ fn tick_spawners(
                 EnemyMarker,
                 Health::default_mob(),
                 AttackTimer::default(),
+                Velocity::default(),
+                Acceleration::default(),
             ));
             enemies_alive.0 += 1;
         }

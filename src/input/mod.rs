@@ -18,5 +18,8 @@ impl Plugin for InputPlugin {
 }
 
 fn init(mut commands: Commands) {
-    commands.insert_resource(ParsedInput::default());
+    commands.insert_resource(ParsedInput {
+        selected_tool: 1,
+        ..default()
+    });
 }

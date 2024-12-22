@@ -13,10 +13,7 @@ pub enum Material {
 }
 
 #[derive(Resource)]
-pub struct WorldTextures {
-    pub texture_handle: Handle<Image>,
-    pub texture_atlas: TextureAtlas,
-}
+pub struct WorldTextureAtlas(pub TextureAtlas);
 
 #[derive(Resource, Default)]
 pub struct WorldEntities {
@@ -33,6 +30,6 @@ pub struct SpawnerTimer(pub Timer);
 
 impl Default for SpawnerTimer {
     fn default() -> Self {
-        SpawnerTimer(Timer::from_seconds(15., TimerMode::Repeating))
+        SpawnerTimer(Timer::from_seconds(5., TimerMode::Repeating))
     }
 }

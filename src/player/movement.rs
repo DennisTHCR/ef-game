@@ -3,7 +3,7 @@ use std::f32::consts::PI;
 use bevy::prelude::*;
 
 use crate::structs::{
-    camera::CameraSettings, input::ParsedInput, markers::PlayerMarker, player::PlayerSettings,
+    camera::CameraSettings, input::ParsedInput, markers::PlayerMarker, player::PlayerStats,
     plugins::PlayerMovementPlugin, state::GameState,
 };
 
@@ -19,11 +19,11 @@ impl Plugin for PlayerMovementPlugin {
 fn handle_keyboard(
     mut transform: Query<&mut Transform, With<PlayerMarker>>,
     parsed_input: Res<ParsedInput>,
-    player_settings: Res<PlayerSettings>,
+    player_stats: Res<PlayerStats>,
     time: Res<Time>,
 ) {
     transform.single_mut().translation +=
-        parsed_input.direction.extend(0.0) * player_settings.speed * time.delta_seconds();
+        parsed_input.direction.extend(0.0) * player_stats.max_speed * time.delta_seconds();
 }
 
 fn handle_mouse(
