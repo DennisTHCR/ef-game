@@ -11,6 +11,8 @@ pub struct PlayerStats {
     pub mining_range: f32,
     pub punch_range: f32,
     pub mining_level: i32,
+    pub max_health: f32,
+    pub regeneration: f32,
 }
 
 impl Default for PlayerStats {
@@ -21,6 +23,8 @@ impl Default for PlayerStats {
             mining_range: 20.,
             punch_range: 20.,
             mining_level: 0,
+            max_health: 100.,
+            regeneration: 0.5,
         }
     }
 }

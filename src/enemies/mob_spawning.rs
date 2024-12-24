@@ -41,9 +41,12 @@ fn tick_spawners(
                     ..default()
                 },
                 EnemyMarker,
-                Health::default_mob(),
+                Health(2.),
                 AttackTimer::default(),
-                Velocity::default(),
+                Velocity {
+                    max: 80.,
+                    ..default()
+                },
                 Acceleration::default(),
             ));
             enemies_alive.0 += 1;

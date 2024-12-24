@@ -8,7 +8,7 @@ use crate::{
     structs::{
         assets::TextureHandles,
         markers::{PlayerMarker, ToolMarker},
-        mobs::Health,
+        mobs::{Acceleration, Health, Velocity},
         player::{PlayerEquipmentAtlas, PlayerStats},
         plugins::{PlayerCombatPlugin, PlayerMovementPlugin, PlayerPlugin, PlayerResourcePlugin},
         ui::HealthDisplay,
@@ -35,7 +35,7 @@ fn init(
     texture_handles: Res<TextureHandles>,
     texture_atlas: Res<PlayerEquipmentAtlas>,
 ) {
-    commands.insert_resource(PlayerStats::default());
+    let player_stats = PlayerStats::default();
     commands
         .spawn((
             SpriteBundle {
@@ -43,7 +43,12 @@ fn init(
                 ..default()
             },
             PlayerMarker,
-            Health::default(),
+            Health(player_stats.max_health),
+            Acceleration::default(),
+            Velocity {
+                max: player_stats.max_speed,
+                ..default()
+            },
         ))
         .with_children(|parent| {
             parent.spawn((
@@ -58,11 +63,12 @@ fn init(
                 texture_atlas.0.clone(),
             ));
         });
+        commands.insert_resource(player_stats);
 }
 
 fn update_health(
     mut text: Query<&mut Text, With<HealthDisplay>>,
     health: Query<&Health, With<PlayerMarker>>,
 ) {
-    text.single_mut().sections[1].value = health.single().current_health.to_string();
+    text.single_mut().sections[1].value = health.single().0.to_string();
 }

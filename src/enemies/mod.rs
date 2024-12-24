@@ -4,7 +4,7 @@ mod movement;
 
 use bevy::prelude::*;
 use combat::damage_player;
-use movement::pathfind;
+use movement::{forcefield, pathfind};
 
 use crate::structs::{
     markers::EnemyMarker,
@@ -17,7 +17,7 @@ impl Plugin for EnemyPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(
             Update,
-            (pathfind, damage_player, tick_death_timer)
+            (pathfind, forcefield, damage_player, tick_death_timer)
                 .chain()
                 .run_if(in_state(GameState::Playing)),
         )

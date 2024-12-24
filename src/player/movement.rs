@@ -3,8 +3,7 @@ use std::f32::consts::PI;
 use bevy::prelude::*;
 
 use crate::structs::{
-    camera::CameraSettings, input::ParsedInput, markers::PlayerMarker, player::PlayerStats,
-    plugins::PlayerMovementPlugin, state::GameState,
+    camera::CameraSettings, input::ParsedInput, markers::PlayerMarker, mobs::{Acceleration, Velocity}, plugins::PlayerMovementPlugin, state::GameState
 };
 
 impl Plugin for PlayerMovementPlugin {
@@ -17,13 +16,18 @@ impl Plugin for PlayerMovementPlugin {
 }
 
 fn handle_keyboard(
-    mut transform: Query<&mut Transform, With<PlayerMarker>>,
+    mut acceleration: Query<(&mut Acceleration, &mut Velocity), With<PlayerMarker>>,
     parsed_input: Res<ParsedInput>,
-    player_stats: Res<PlayerStats>,
     time: Res<Time>,
 ) {
-    transform.single_mut().translation +=
-        parsed_input.direction.extend(0.0) * player_stats.max_speed * time.delta_seconds();
+    let (mut acceleration, mut velocity) = acceleration.single_mut();
+    acceleration.0 += parsed_input.direction * 150000. * time.delta_seconds();
+    if parsed_input.direction.length() == 0. {
+        if velocity.current.length() <= 0.5 {
+            velocity.current = Vec2::ZERO;
+        }
+        acceleration.0 += -velocity.current * 15000. * time.delta_seconds();
+    }
 }
 
 fn handle_mouse(

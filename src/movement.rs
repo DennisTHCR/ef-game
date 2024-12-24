@@ -19,7 +19,7 @@ impl Plugin for MovementPlugin {
 
 fn apply_velocity(mut entities: Query<(&mut Transform, &Velocity)>, time: Res<Time>) {
     entities.iter_mut().for_each(|(mut transform, velocity)| {
-        transform.translation += velocity.0.extend(0.0) * time.delta_seconds();
+        transform.translation += velocity.current.extend(0.0) * time.delta_seconds();
     });
 }
 
@@ -27,8 +27,8 @@ fn apply_acceleration(mut entities: Query<(&mut Velocity, &mut Acceleration)>, t
     entities
         .iter_mut()
         .for_each(|(mut velocity, mut acceleration)| {
-            velocity.0 += acceleration.0 * time.delta_seconds();
-            velocity.0 = velocity.0.clamp_length(0., 80.);
+            velocity.current += acceleration.0 * time.delta_seconds();
+            velocity.current = velocity.current.clamp_length(0., velocity.max);
             acceleration.0 = Vec2::ZERO;
         });
 }

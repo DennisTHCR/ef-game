@@ -25,12 +25,12 @@ pub fn damage_player(
                 if attack_timer.0.just_finished() {
                     let diff = player_translation - enemy_transform.translation;
                     enemy_transform.translation += diff.normalize() * 20.;
-                    player.single_mut().0.current_health -= 1;
-                    health.current_health -= 1;
-                    if health.current_health <= 0 {
+                    player.single_mut().0.0 -= 1.;
+                    health.0 -= 1.;
+                    if health.0 <= 0. {
                         commands.entity(entity).insert(DeathTimer::default());
                     }
-                    if player.single().0.current_health <= 0 {
+                    if player.single().0.0 <= 0. {
                         next_state.set(GameState::Paused);
                     }
                     attack_timer.0.reset();
