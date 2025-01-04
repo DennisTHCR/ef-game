@@ -10,7 +10,7 @@ impl Plugin for KeyboardPlugin {
 
 fn update(mut parsed_input: ResMut<ParsedInput>, keys: Res<ButtonInput<KeyCode>>) {
     let number_keycodes = [
-        KeyCode::Digit0,
+        KeyCode::KeyX,
         KeyCode::Digit1,
         KeyCode::Digit2,
         KeyCode::Digit3,
@@ -35,7 +35,7 @@ fn update(mut parsed_input: ResMut<ParsedInput>, keys: Res<ButtonInput<KeyCode>>
             return;
         }
         parsed_input.selected_tool = match key_code {
-            KeyCode::Digit0 => 0,
+            KeyCode::KeyX => 0,
             KeyCode::Digit1 => 1,
             KeyCode::Digit2 => 2,
             KeyCode::Digit3 => 3,

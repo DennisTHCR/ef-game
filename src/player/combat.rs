@@ -15,12 +15,11 @@ fn regenerate(mut health: Query<&mut Health, With<PlayerMarker>>, player_stats: 
 }
 
 fn handle_mouse(
+    player_stats: Res<PlayerStats>,
     parsed_input: Res<ParsedInput>,
     mut weapon: Query<&mut Transform, (With<ToolMarker>, Without<PlayerMarker>)>,
 ) {
-    if parsed_input.left_click {
-        weapon
-            .single_mut()
-            .rotate_around(Vec3::splat(0.), Quat::from_rotation_z(3.14));
+    if !parsed_input.left_click || player_stats.selected_tool != 2 {
+        
     }
 }
