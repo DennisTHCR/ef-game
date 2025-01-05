@@ -1,21 +1,15 @@
 use std::path::Path;
 
 use crate::structs::{
-    assets::{MeshHandles, TextureHandles},
+    assets::TextureHandles,
     plugins::AssetPlugin,
 };
 use bevy::prelude::*;
 
 impl Plugin for AssetPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, (init_meshes, init_textures));
+        app.add_systems(Startup, init_textures);
     }
-}
-
-pub fn init_meshes(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>) {
-    commands.insert_resource(MeshHandles {
-        health_rectangle: meshes.add(Rectangle::new(100.0, 20.0)),
-    });
 }
 
 pub fn init_textures(mut commands: Commands, asset_server: Res<AssetServer>) {

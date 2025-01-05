@@ -30,6 +30,6 @@ pub struct SpawnerTimer(pub Timer);
 
 impl Default for SpawnerTimer {
     fn default() -> Self {
-        SpawnerTimer(Timer::from_seconds(0.01, TimerMode::Repeating))
+        SpawnerTimer(Timer::from_seconds(15., TimerMode::Repeating))
     }
 }

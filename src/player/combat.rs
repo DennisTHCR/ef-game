@@ -1,5 +1,5 @@
 use crate::structs::{
-    input::ParsedInput, markers::{PlayerMarker, ToolMarker}, mobs::Health, player::PlayerStats, plugins::PlayerCombatPlugin
+    input::ParsedInput, markers::{EnemyMarker, PlayerMarker}, mobs::Health, player::PlayerStats, plugins::PlayerCombatPlugin
 };
 use bevy::prelude::*;
 
@@ -17,9 +17,17 @@ fn regenerate(mut health: Query<&mut Health, With<PlayerMarker>>, player_stats: 
 fn handle_mouse(
     player_stats: Res<PlayerStats>,
     parsed_input: Res<ParsedInput>,
-    mut weapon: Query<&mut Transform, (With<ToolMarker>, Without<PlayerMarker>)>,
+    player_transform: Query<&Transform, (With<PlayerMarker>, Without<EnemyMarker>)>,
+    mut enemies: Query<(&mut Health, &Transform), (With<EnemyMarker>, Without<PlayerMarker>)>,
 ) {
     if !parsed_input.left_click || player_stats.selected_tool != 2 {
-        
+        return;
     }
+    let player_translation = player_transform.single().translation;
+    enemies.iter_mut().for_each(|(mut health, transform)| {
+        if (player_translation - transform.translation).xy().length() <= player_stats.punch_range {
+            health.0 -= player_stats.punch_force;
+            println!("New health: {}", health.0);
+        }
+    });
 }
