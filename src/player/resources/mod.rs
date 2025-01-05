@@ -24,14 +24,14 @@ fn gather(
     mut available_resources: ResMut<AvailableResources>,
     parsed_input: Res<ParsedInput>,
     world_materials: Res<WorldMaterials>,
-    player_stats: Res<PlayerStats>,
+    mut player_stats: ResMut<PlayerStats>,
     player_transform: Query<&Transform, With<PlayerMarker>>,
 ) {
     let pos = parsed_input.cursor_position;
     let player_pos = player_transform.single().translation.xy();
     if !parsed_input.left_click
         || player_stats.selected_tool != 1
-        || (pos - player_pos).length() > player_stats.mining_range
+        || (pos - player_pos).length() > player_stats.range
     {
         return;
     }
@@ -54,9 +54,14 @@ fn gather(
     if level > player_stats.mining_level {
         return;
     }
+    if level == player_stats.mining_level {
+        player_stats.mining_level += 1;
+        player_stats.range += 5.;
+    }
     let resource_map = &mut available_resources.resource_map;
     if resource_map.get(&material).is_none() {
         resource_map.insert(material, 0);
     }
     resource_map.insert(material, resource_map[&material] + 1);
+    player_stats.range += 0.1 * level as f32;
 }

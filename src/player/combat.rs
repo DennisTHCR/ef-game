@@ -23,7 +23,7 @@ fn regenerate(
 }
 
 fn handle_mouse(
-    player_stats: Res<PlayerStats>,
+    mut player_stats: ResMut<PlayerStats>,
     parsed_input: Res<ParsedInput>,
     player_transform: Query<&Transform, (With<PlayerMarker>, Without<EnemyMarker>)>,
     mut enemies: Query<(&mut Health, &Transform), (With<EnemyMarker>, Without<PlayerMarker>)>,
@@ -33,9 +33,12 @@ fn handle_mouse(
     }
     let player_translation = player_transform.single().translation;
     enemies.iter_mut().for_each(|(mut health, transform)| {
-        if (player_translation - transform.translation).xy().length() <= player_stats.punch_range {
+        if (player_translation - transform.translation).xy().length() <= player_stats.range {
             health.0 -= player_stats.punch_force;
-            println!("New health: {}", health.0);
+            if health.0 == 0. {
+                player_stats.punch_force += 0.25;
+                player_stats.range += 5.;
+            }
         }
     });
 }

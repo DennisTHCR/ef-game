@@ -3,10 +3,9 @@ use strum::IntoEnumIterator;
 
 use crate::structs::{
     input::ParsedInput,
-    mobs::EnemiesAlive,
     player::AvailableResources,
     plugins::UiPlugin,
-    ui::{EnemyDisplay, HealthDisplay, MaterialsDisplay, StatusDisplay},
+    ui::{HealthDisplay, MaterialsDisplay, StatusDisplay},
     world::Material,
 };
 
@@ -16,7 +15,6 @@ impl Plugin for UiPlugin {
             Update,
             (
                 update_material_display,
-                update_enemies_alive,
                 toggle_inventory,
             ),
         );
@@ -96,13 +94,6 @@ fn init(mut commands: Commands, asset_server: Res<AssetServer>) {
                         ]),
                         HealthDisplay,
                     ));
-                    parent.spawn((
-                        TextBundle::from_sections([
-                            TextSection::new("Enemies: ", text_style.clone()),
-                            TextSection::new("", text_style.clone()),
-                        ]),
-                        EnemyDisplay,
-                    ));
                 });
         });
 }
@@ -145,11 +136,4 @@ fn update_material_display(
             section.style.color = color;
         }
     });
-}
-
-fn update_enemies_alive(
-    mut text_box: Query<&mut Text, With<EnemyDisplay>>,
-    enemies_alive: Res<EnemiesAlive>,
-) {
-    text_box.single_mut().sections[1].value = enemies_alive.0.to_string();
 }

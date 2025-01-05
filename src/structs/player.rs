@@ -8,8 +8,7 @@ use super::world::Material;
 pub struct PlayerStats {
     pub max_speed: f32,
     pub selected_tool: i32,
-    pub mining_range: f32,
-    pub punch_range: f32,
+    pub range: f32,
     pub punch_force: f32,
     pub mining_level: i32,
     pub max_health: f32,
@@ -21,12 +20,11 @@ impl Default for PlayerStats {
         PlayerStats {
             max_speed: 100.,
             selected_tool: 0,
-            mining_range: 40.,
-            punch_range: 40.,
-            punch_force: 2.,
+            range: 30.,
+            punch_force: 0.5,
             mining_level: 0,
             max_health: 100.,
-            regeneration: 0.1,
+            regeneration: 0.0,
         }
     }
 }

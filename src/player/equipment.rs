@@ -30,16 +30,16 @@ pub fn change_range_indicator(
         if *material != material_handles.blue {
             *material = material_handles.blue.clone();
         }
-        if transform.scale.x != player_stats.mining_range {
-            transform.scale = Vec3::splat(player_stats.mining_range);
+        if transform.scale.x != player_stats.range {
+            transform.scale = Vec3::splat(player_stats.range);
         }
     }
     if player_stats.selected_tool == 2 {
         if *material != material_handles.red {
             *material = material_handles.red.clone();
         }
-        if transform.scale.x != player_stats.punch_range {
-            transform.scale = Vec3::splat(player_stats.punch_range);
+        if transform.scale.x != player_stats.range {
+            transform.scale = Vec3::splat(player_stats.range);
         }
     }
 }

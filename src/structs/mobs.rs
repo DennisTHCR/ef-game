@@ -8,7 +8,7 @@ pub struct AttackTimer(pub Timer);
 
 impl Default for AttackTimer {
     fn default() -> Self {
-        AttackTimer(Timer::from_seconds(2.0, TimerMode::Once))
+        AttackTimer(Timer::from_seconds(0.8, TimerMode::Once))
     }
 }
 

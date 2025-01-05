@@ -32,6 +32,8 @@ fn tick_spawners(
     spawners.iter_mut().for_each(|(mut timer, &transform)| {
         timer.0.tick(Duration::from_secs_f32(time.delta_seconds()));
         if timer.0.just_finished() {
+            let duration = timer.0.duration().as_secs_f32();
+            timer.0.set_duration(Duration::from_secs_f32(duration * 0.9));
             let mut new_transform = transform;
             new_transform.translation.z = -0.5;
             commands.spawn((
@@ -44,7 +46,7 @@ fn tick_spawners(
                 Health(2.),
                 AttackTimer::default(),
                 Velocity {
-                    max: 80.,
+                    max: 110.,
                     ..default()
                 },
                 Acceleration::default(),
