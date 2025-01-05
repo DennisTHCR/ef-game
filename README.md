@@ -11,10 +11,7 @@ TODO:
     - [x] Spread around the map
     - [x] Cooldown
     - [x] Procedurally generated
-    - [ ] Amount of enemies increases with each round
-    - [x] Cooldown stays consistent
+    - [x] Amount of enemies increases with each round
 - Upgrades
-    - [ ] Mining
-    - [ ] Damage
-    - [ ] Gun
-    - [ ] Ammo (crafting?)
+    - [x] Mining
+    - [x] Damage
