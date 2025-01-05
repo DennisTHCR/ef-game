@@ -1,21 +1,47 @@
 use bevy::prelude::*;
 
 use crate::structs::{
+    assets::MaterialHandles,
     input::ParsedInput,
-    markers::ToolMarker,
+    markers::{RangeDisplayMarker, ToolMarker},
     player::{PlayerEquipmentAtlas, PlayerStats},
 };
 
 pub fn change_tool(
     input: Res<ParsedInput>,
     mut player_stats: ResMut<PlayerStats>,
-    mut texture_atlas: Query<&mut TextureAtlas, With<ToolMarker>>,
+    mut query: Query<&mut TextureAtlas, With<ToolMarker>>,
 ) {
+    let mut texture_atlas = query.single_mut();
     if input.selected_tool == player_stats.selected_tool {
         return;
     }
     player_stats.selected_tool = input.selected_tool;
-    texture_atlas.single_mut().index = input.selected_tool as usize;
+    texture_atlas.index = input.selected_tool as usize;
+}
+
+pub fn change_range_indicator(
+    player_stats: Res<PlayerStats>,
+    material_handles: Res<MaterialHandles>,
+    mut query: Query<(&mut Transform, &mut Handle<ColorMaterial>), With<RangeDisplayMarker>>,
+) {
+    let (mut transform, mut material) = query.single_mut();
+    if player_stats.selected_tool == 1 {
+        if *material != material_handles.blue {
+            *material = material_handles.blue.clone();
+        }
+        if transform.scale.x != player_stats.mining_range {
+            transform.scale = Vec3::splat(player_stats.mining_range);
+        }
+    }
+    if player_stats.selected_tool == 2 {
+        if *material != material_handles.red {
+            *material = material_handles.red.clone();
+        }
+        if transform.scale.x != player_stats.punch_range {
+            transform.scale = Vec3::splat(player_stats.punch_range);
+        }
+    }
 }
 
 pub fn init_texture_atlas(

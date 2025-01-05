@@ -1,5 +1,9 @@
 use crate::structs::{
-    input::ParsedInput, markers::{EnemyMarker, PlayerMarker}, mobs::Health, player::PlayerStats, plugins::PlayerCombatPlugin
+    input::ParsedInput,
+    markers::{EnemyMarker, PlayerMarker},
+    mobs::Health,
+    player::PlayerStats,
+    plugins::PlayerCombatPlugin,
 };
 use bevy::prelude::*;
 
@@ -9,7 +13,11 @@ impl Plugin for PlayerCombatPlugin {
     }
 }
 
-fn regenerate(mut health: Query<&mut Health, With<PlayerMarker>>, player_stats: Res<PlayerStats>, time: Res<Time>) {
+fn regenerate(
+    mut health: Query<&mut Health, With<PlayerMarker>>,
+    player_stats: Res<PlayerStats>,
+    time: Res<Time>,
+) {
     health.single_mut().0 += health.single().0 * player_stats.regeneration * time.delta_seconds();
     health.single_mut().0 = health.single().0.clamp(0.0, player_stats.max_health);
 }

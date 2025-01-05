@@ -17,7 +17,13 @@ impl Plugin for EnemyPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(
             Update,
-            (pathfind, forcefield, damage_player, tick_death_timer, check_health)
+            (
+                pathfind,
+                forcefield,
+                damage_player,
+                tick_death_timer,
+                check_health,
+            )
                 .chain()
                 .run_if(in_state(GameState::Playing)),
         )
@@ -25,7 +31,10 @@ impl Plugin for EnemyPlugin {
     }
 }
 
-fn check_health(query: Query<(&Health, Entity), (With<EnemyMarker>, Without<DeathTimer>)>, mut commands: Commands) {
+fn check_health(
+    query: Query<(&Health, Entity), (With<EnemyMarker>, Without<DeathTimer>)>,
+    mut commands: Commands,
+) {
     query.iter().for_each(|(health, entity)| {
         if health.0 <= 0. {
             commands.entity(entity).insert(DeathTimer::default());

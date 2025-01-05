@@ -10,3 +10,5 @@ pub struct EnemyMarker;
 pub struct SpawnerMarker;
 #[derive(Component)]
 pub struct ToolMarker;
+#[derive(Component)]
+pub struct RangeDisplayMarker;

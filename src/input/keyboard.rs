@@ -9,12 +9,7 @@ impl Plugin for KeyboardPlugin {
 }
 
 fn update(mut parsed_input: ResMut<ParsedInput>, keys: Res<ButtonInput<KeyCode>>) {
-    let number_keycodes = [
-        KeyCode::KeyX,
-        KeyCode::Digit1,
-        KeyCode::Digit2,
-        KeyCode::Digit3,
-    ];
+    let number_keycodes = [KeyCode::KeyX, KeyCode::Digit1, KeyCode::Digit2];
     let mut direction: Vec2 = Vec2::default();
     if keys.pressed(KeyCode::KeyD) {
         direction.x += 1.0;
@@ -38,7 +33,6 @@ fn update(mut parsed_input: ResMut<ParsedInput>, keys: Res<ButtonInput<KeyCode>>
             KeyCode::KeyX => 0,
             KeyCode::Digit1 => 1,
             KeyCode::Digit2 => 2,
-            KeyCode::Digit3 => 3,
             _ => -1,
         }
     });
