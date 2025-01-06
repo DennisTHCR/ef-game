@@ -30,7 +30,7 @@ fn handle_keyboard(
         if velocity.current.length() <= 0.5 {
             velocity.current = Vec2::ZERO;
         }
-        acceleration.0 += -velocity.current * 15000. * time.delta_seconds();
+        velocity.current /= 5.;
     }
 }
 
